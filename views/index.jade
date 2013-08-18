@@ -1,0 +1,56 @@
+extends layout
+block header
+  .row.header-container
+    .large-10.columns
+        h1 #{title}
+    .large-2.columns
+      a.filter-link(href="#") FILTERS
+      
+   
+block content
+  .row
+    .large-12.columns.large-centered
+      .row
+        .large-2.columns
+      
+      .filter-container
+        .row
+          .large-12.columns
+            #value-range
+              .value-1
+              .value-2
+              .value-3
+              .value-4
+              .value-5
+            #value-slider
+              .value-1.active(data-value="1")
+              .value-2.active(data-value="2")
+              .value-3.active(data-value="3")
+              .value-4.active(data-value="4")
+              .value-5.active(data-value="5")
+      .row
+        .map-container.large-9.columns
+        .data-container.large-3.columns
+          | here is the data
+          
+
+
+block scripts
+  script(src="http://d3js.org/d3.v3.min.js")
+  script(src="http://d3js.org/topojson.v1.min.js")
+  script(src="http://d3js.org/queue.v1.min.js")
+  script(src="/javascripts/map.js")
+  script
+    $(".filter-link").click(function() {
+      var fadeTime = 500;
+      if($(".filter-container").is(":visible")){
+        $(".filter-container").slideUp(fadeTime);
+        $(".filter-link").fadeTo(fadeTime,.6)
+      }
+      else {
+        $(".filter-container").slideDown(fadeTime);
+        $(".filter-link").fadeTo(fadeTime,.8)
+      }
+    });
+       
+  

@@ -1,0 +1,108 @@
+@import "_colors";
+@import "compass/css3/opacity";
+
+header {
+  background-color: $header-background;
+  height: 70px;
+  text-align: right;
+  h1 {
+    text-align: left;
+    margin: 0 0 0 0.875em;
+    line-height: 70px;
+  }
+}
+.header-container {
+  display: none;
+}
+html, body {
+  height: 100%;
+}
+body {
+  background-color: $background;
+}
+
+.filter-link {
+  display: inline-block;
+  font-weight: 300;
+  font-size: 0.75em;
+  background: $white-40;
+  color: $white;
+  @include opacity(.6);
+  margin-top: 2.1em;
+  padding: 0.5em 2em;
+  &:hover {
+    color: $white;
+  }
+}
+
+.filter-container {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: $white-60;
+  padding: 1.25em;
+  display: none;
+}
+
+.map-container .background {
+  fill: $background;
+  pointer-events: all;
+}
+
+.data-container  {
+  //margin: 1.25em 0;
+  margin-right: - 0.9375em;
+  height: 40em;
+  background-color: $white-40;
+}
+
+#states {
+  fill: #EDEFED;
+  .active {
+    fill: #E2E3E3;
+  }
+}
+#state-borders {
+  fill: none;
+  stroke: #D4D9D3;
+  stroke-width: 1px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+#value-slider,
+#value-range {
+  clear: both;
+  div {
+    float: left;
+    width: 36px;
+    height: 12px;
+  }
+}
+#value-range {
+  div {
+    height: 8px;
+  }
+}
+.value-5 {
+  fill: $value-5;
+  background-color: $value-5;
+}
+.value-4 {
+  fill: $value-4;
+  background-color: $value-4;
+}
+.value-3 {
+  fill: $value-3;
+  background-color: $value-3;
+}
+.value-2 {
+  fill: $value-2;
+  background-color: $value-2;
+}
+.value-1 {
+  fill: $value-1;
+  background-color: $value-1;
+}

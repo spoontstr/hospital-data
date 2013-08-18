@@ -1,0 +1,29 @@
+doctype 5
+html
+  head
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, user-scalable=no")
+    
+    title #{title} 
+    
+    script(src="/javascripts/ext/custom.modernizr.js")
+    script(src="//use.typekit.net/fax6kvq.js")
+    script
+      try{Typekit.load();}catch(e){}
+          
+    link(rel='stylesheet', href='/stylesheets/app.css')
+    link(rel='stylesheet', href='/stylesheets/main.css')
+    
+    block head
+ 
+  body
+    .page-container
+      header
+        block header
+      .content-container
+        block content
+      footer
+        block footer
+        
+      script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js")
+      block scripts
+        

@@ -1,0 +1,136 @@
+/* line 4, ../sass/main.scss */
+header {
+  background-color: #293239;
+  height: 70px;
+  text-align: right;
+}
+/* line 8, ../sass/main.scss */
+header h1 {
+  text-align: left;
+  margin: 0 0 0 0.875em;
+  line-height: 70px;
+}
+
+/* line 14, ../sass/main.scss */
+.header-container {
+  display: none;
+}
+
+/* line 17, ../sass/main.scss */
+html, body {
+  height: 100%;
+}
+
+/* line 20, ../sass/main.scss */
+body {
+  background-color: #d4d9d3;
+}
+
+/* line 24, ../sass/main.scss */
+.filter-link {
+  display: inline-block;
+  font-weight: 300;
+  font-size: 0.75em;
+  background: rgba(255, 255, 255, 0.4);
+  color: white;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+  opacity: 0.6;
+  margin-top: 2.1em;
+  padding: 0.5em 2em;
+}
+/* line 33, ../sass/main.scss */
+.filter-link:hover {
+  color: white;
+}
+
+/* line 38, ../sass/main.scss */
+.filter-container {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 1.25em;
+  display: none;
+}
+
+/* line 49, ../sass/main.scss */
+.map-container .background {
+  fill: #d4d9d3;
+  pointer-events: all;
+}
+
+/* line 54, ../sass/main.scss */
+.data-container {
+  margin-right: -0.9375em;
+  height: 40em;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* line 61, ../sass/main.scss */
+#states {
+  fill: #EDEFED;
+}
+/* line 63, ../sass/main.scss */
+#states .active {
+  fill: #E2E3E3;
+}
+
+/* line 67, ../sass/main.scss */
+#state-borders {
+  fill: none;
+  stroke: #D4D9D3;
+  stroke-width: 1px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+/* line 76, ../sass/main.scss */
+#value-slider,
+#value-range {
+  clear: both;
+}
+/* line 78, ../sass/main.scss */
+#value-slider div,
+#value-range div {
+  float: left;
+  width: 36px;
+  height: 12px;
+}
+
+/* line 85, ../sass/main.scss */
+#value-range div {
+  height: 8px;
+}
+
+/* line 89, ../sass/main.scss */
+.value-5 {
+  fill: #00384f;
+  background-color: #00384f;
+}
+
+/* line 93, ../sass/main.scss */
+.value-4 {
+  fill: #0f7199;
+  background-color: #0f7199;
+}
+
+/* line 97, ../sass/main.scss */
+.value-3 {
+  fill: #289dcc;
+  background-color: #289dcc;
+}
+
+/* line 101, ../sass/main.scss */
+.value-2 {
+  fill: #5bbee5;
+  background-color: #5bbee5;
+}
+
+/* line 105, ../sass/main.scss */
+.value-1 {
+  fill: #bfe2ef;
+  background-color: #bfe2ef;
+}
