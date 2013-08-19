@@ -1,5 +1,5 @@
 var width = 850, 
-    height = 600,
+    height = 675,
     centered
   
 var projection = d3.geo.albersUsa()
@@ -33,6 +33,7 @@ function ready(error, us, hospitals){
    .data(topojson.feature(us, us.objects.states).features)
    .enter().append("path")
    .attr("d", path)
+   .attr("id", function(d) { d.id })
    .on("click", clicked)
 
      
@@ -43,37 +44,63 @@ function ready(error, us, hospitals){
        
   g.append("g")
    .attr("id","hospitals")
-   .selectAll(".location")
+   .selectAll("path")
    .data(topojson.feature(hospitals, hospitals.objects.hospitals).features)
    .enter().append("path")
    .attr("d", path.pointRadius(3))
-   .attr("class", function(d) { return "value-" + d.properties.value })
+   .attr("id", function(d) { return d.id })
+   .attr("class", function(d) { return "hospital-location value-" + d.properties.value_rating })
+   //.style("opacity",".9")
    .on("click", clicked)
-   .style("opacity",".9")
    
-   $(".header-container").fadeIn(1500);
+   $(".header-container").fadeIn(1000);
 }
+
 
 function clicked(d) {
   var x, y, k;
-
+  
   if (d && centered !== d) {
-    var centroid = path.centroid(d);
-    x = centroid[0];
-    y = centroid[1];
+    var centroid = path.centroid(d)
+    x = centroid[0]
+    y = centroid[1]
     k = 4;
-    centered = d;
+    centered = d
   } else {
-    x = width / 2;
-    y = height / 2;
-    k = 1;
-    centered = null;
+    x = width / 2
+    y = height / 2
+    k = 1
+    centered = null
   }
 
   g.selectAll("path")
-   .classed("active", centered && function(d) { return d === centered; });
+   .classed("active", centered && function(d) { return d === centered })
 
   g.transition()
-   .duration(800)
+   .duration(500)
    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
+  
+  if(d.properties.value_rating != undefined && centered) {
+    $.get('/hospital/' + d.id, function(res) {
+      $(".hospital-container .result").html(res)
+      
+      if( $(".hospitals-container").is(":visible") ) {
+        $(".hospitals-container").fadeOut(100, function() {
+          $(".hospital-container").fadeIn(500)
+        })
+      }
+      
+      g.select("#hospitals")
+       .selectAll("path")
+       .classed("inactive", function(d) { return d !== centered })
+    });
+  }
+  else {
+    $(".hospital-container").fadeOut(500, function() {
+      $(".hospitals-container").fadeIn(100)
+    });
+    g.select("#hospitals")
+     .selectAll("path")
+     .classed("inactive", false)
+  }
 }

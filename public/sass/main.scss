@@ -1,5 +1,7 @@
 @import "_colors";
 @import "compass/css3/opacity";
+@import "compass/css3/border-radius";
+@import "compass/utilities/text/ellipsis";
 
 header {
   background-color: $header-background;
@@ -13,6 +15,8 @@ header {
 }
 .header-container {
   display: none;
+  vertical-align: bottom;
+  height: 100%;
 }
 html, body {
   height: 100%;
@@ -21,17 +25,22 @@ body {
   background-color: $background;
 }
 
-.filter-link {
-  display: inline-block;
-  font-weight: 300;
-  font-size: 0.75em;
-  background: $white-40;
-  color: $white;
-  @include opacity(.6);
-  margin-top: 2.1em;
-  padding: 0.5em 2em;
-  &:hover {
+.header-container .filter-link-container {
+  height: 100%;
+  margin-right: - 0.9375em;
+  .filter-link {
+    position: absolute;
+    bottom: 1.5em;
+    left: 0;
+    font-size: 0.875em;
+    font-weight: 300;
+    background: $white-40;
     color: $white;
+    @include opacity(.6);
+    padding: 0.5em 2em;
+    &:hover {
+      color: $white;
+    }
   }
 }
 
@@ -41,27 +50,94 @@ body {
   top: 0;
   left: 0;
   right: 0;
+  margin-right: - 0.9375em;
+  margin-left: 2em;
   background-color: $white-60;
   padding: 1.25em;
   display: none;
 }
 
-.map-container .background {
-  fill: $background;
-  pointer-events: all;
+.map-container {
+  .background {
+    fill: $background;
+    pointer-events: all;
+  }
+  .hospital-location {
+    opacity: .7;
+  }
+  .hospital-location.active {
+    opacity: 1;
+  }
+  .hospital-location.inactive {
+    opacity: .2;
+  }
 }
 
 .data-container  {
-  //margin: 1.25em 0;
   margin-right: - 0.9375em;
-  height: 40em;
+  margin-left: - 0.9375em;
+  padding: 0;
+  height: 42.188em;
   background-color: $white-40;
+  .hospitals-container {
+    padding: 2em 1.25em;
+  }
+  .hospitals-container li {
+    list-style: none;
+    margin: 0.625em 0 0 0;
+    padding: 0;
+    font-size: 0.875em;
+    line-height: 1.2em;
+  }
+  .hospital-container {
+    display: none;
+    h4 {
+      margin: 0;
+      padding: 0.625em 0.9375em;
+      font-size: 21px;
+      width: 100%;
+      background-color: $background-accent;
+      @include ellipsis();
+    }
+    h5 {
+      display: inline-block;
+      color: $text-color;
+    }
+    .address-container {
+      padding: 1.25em 0 0.625em 0;
+    }
+    .ratings-container {
+      .value {
+        padding-left: 0.75em;
+      }
+      .label {
+        width: 100%;
+        text-align: center;
+        font-weight: 300;
+        background-color: transparent;
+        color: $text-color;
+      }
+    }
+    .rating {
+      text-align: center;
+      width: 60px;
+      height: 60px;
+      line-height: 60px;
+      @include border-radius(60px)
+    }
+    .cost-rating,
+    .quality-rating {
+      background-color: $white-60;
+      color: $background-accent;
+    }
+  }
 }
 
+
 #states {
-  fill: #EDEFED;
+  fill: $states;
   .active {
-    fill: #E2E3E3;
+    fill: $states-active;
   }
 }
 #state-borders {

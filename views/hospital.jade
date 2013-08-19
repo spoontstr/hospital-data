@@ -1,0 +1,23 @@
+if hospital
+  h4= hospital.name
+  
+  .row.collapse
+    .large-10.columns.large-centered
+      .address-container
+        .address #{hospital.address}
+        .city-state-zip  #{hospital.city}, #{hospital.state} #{hospital.zip}
+      .ratings-container
+        h5 Ratings
+        .row.collapse
+          .large-4.columns
+            .value
+              h3.rating.cost-rating  #{hospital.cost_rating}
+            .label Cost
+          .large-4.columns
+            .value
+              h3.rating.quality-rating  #{hospital.quality_rating}
+            .label Quality
+          .large-4.columns
+            .value
+              h3.rating.value-rating(class="value-" +  Math.round(hospital.value_rating))  #{hospital.value_rating}
+            .label Value

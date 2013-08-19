@@ -1,9 +1,9 @@
 extends layout
 block header
   .row.header-container
-    .large-10.columns
+    .large-9.columns
         h1 #{title}
-    .large-2.columns
+    .filter-link-container.large-3.columns
       a.filter-link(href="#") FILTERS
       
    
@@ -31,9 +31,20 @@ block content
       .row
         .map-container.large-9.columns
         .data-container.large-3.columns
-          | here is the data
+          .row
+            .large-12.columns
+              if hospitals
+                ul.hospitals-container
+                  - each hospital in hospitals
+                    li
+                      .row 
+                        .large-10.columns= hospital.name
+                        .large-2.columns= hospital.value_rating
+              .hospital-container
+                .result
+                   
           
-
+  #result
 
 block scripts
   script(src="http://d3js.org/d3.v3.min.js")
