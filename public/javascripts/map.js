@@ -20,25 +20,25 @@ svg.append("rect")
    .on("click", clicked)
   
 queue()
-   .defer(d3.json, "/javascripts/us.json")
+   .defer(d3.json, "/javascripts/state.json")
    .defer(d3.json, "/javascripts/hospitals.json")
+   .defer(d3.json, "/javascripts/state_centroids.json")
    .await(ready)
   
 var g = svg.append("g");  //create a group
     
-function ready(error, us, hospitals){
+function ready(error, us, hospitals, centroids){
   g.append("g")
    .attr("id","states")
    .selectAll("path")
-   .data(topojson.feature(us, us.objects.states).features)
+   .data(topojson.feature(us, us.objects.state).features)
    .enter().append("path")
    .attr("d", path)
-   .attr("id", function(d) { d.id })
    .on("click", clicked)
 
-     
+    
   g.append("path")
-   .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+   .datum(topojson.mesh(us, us.objects.state, function(a, b) { return a !== b; }))
    .attr("id", "state-borders")
    .attr("d", path);
        
@@ -47,10 +47,9 @@ function ready(error, us, hospitals){
    .selectAll("path")
    .data(topojson.feature(hospitals, hospitals.objects.hospitals).features)
    .enter().append("path")
-   .attr("d", path.pointRadius(3))
+   .attr("d", path.pointRadius(4))
    .attr("id", function(d) { return d.id })
    .attr("class", function(d) { return "hospital-location value-" + d.properties.value_rating })
-   //.style("opacity",".9")
    .on("click", clicked)
    
    $(".header-container").fadeIn(1000);
@@ -76,11 +75,13 @@ function clicked(d) {
   g.selectAll("path")
    .classed("active", centered && function(d) { return d === centered })
 
+
   g.transition()
    .duration(500)
    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
-  
-  if(d.properties.value_rating != undefined && centered) {
+
+   
+  if(d && d.properties && d.properties.value_rating != undefined && centered) {
     $.get('/hospital/' + d.id, function(res) {
       $(".hospital-container .result").html(res)
       
@@ -93,14 +94,24 @@ function clicked(d) {
       g.select("#hospitals")
        .selectAll("path")
        .classed("inactive", function(d) { return d !== centered })
-    });
+    })
   }
   else {
-    $(".hospital-container").fadeOut(500, function() {
-      $(".hospitals-container").fadeIn(100)
-    });
-    g.select("#hospitals")
-     .selectAll("path")
-     .classed("inactive", false)
+    var usps_state = 'ALL'
+    var state = 'All'
+    if(centered && d && d.properties) {
+      usps_state = d.properties.STUSPS10 ? d.properties.STUSPS10 : usps_state
+      state = d.properties.NAME10 ? d.properties.NAME10 : state
+    }
+
+    $.get('/hospitals/' + usps_state + '/' + state, function(res) {
+      $(".hospitals-container .result").html(res)
+      $(".hospital-container").fadeOut(500, function() {
+        $(".hospitals-container").fadeIn(100)
+      });
+      g.select("#hospitals")
+       .selectAll("path")
+       .classed("inactive", false)
+    })
   }
 }

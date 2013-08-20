@@ -8,7 +8,7 @@ block header
       
    
 block content
-  .row
+  .row.main-content
     .large-12.columns.large-centered
       .row
         .large-2.columns
@@ -31,17 +31,10 @@ block content
       .row
         .map-container.large-9.columns
         .data-container.large-3.columns
-          .row
-            .large-12.columns
-              if hospitals
-                ul.hospitals-container
-                  - each hospital in hospitals
-                    li
-                      .row 
-                        .large-10.columns= hospital.name
-                        .large-2.columns= hospital.value_rating
-              .hospital-container
-                .result
+          .hospitals-container
+            .result
+          .hospital-container
+            .result
                    
           
   #result
@@ -63,5 +56,7 @@ block scripts
         $(".filter-link").fadeTo(fadeTime,.8)
       }
     });
+    $(".hospitals-container .result").load('/hospitals/ALL/All');
+    
        
   
