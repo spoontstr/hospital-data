@@ -1,0 +1,8 @@
+if hospitals && hospitals.length != 0
+  ul
+    h4 Top Value Hospitals #{state ? 'in ' + state : ''}
+    - each hospital in hospitals
+      li
+        .row 
+          .large-10.columns= hospital.name
+          .large-2.columns= hospital.value_rating
