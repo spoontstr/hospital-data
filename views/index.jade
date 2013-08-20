@@ -1,14 +1,14 @@
 extends layout
 block header
   .row.header-container
-    .large-10.columns
+    .large-9.columns
         h1 #{title}
-    .large-2.columns
+    .filter-link-container.large-3.columns
       a.filter-link(href="#") FILTERS
       
    
 block content
-  .row
+  .row.main-content
     .large-12.columns.large-centered
       .row
         .large-2.columns
@@ -31,9 +31,13 @@ block content
       .row
         .map-container.large-9.columns
         .data-container.large-3.columns
-          | here is the data
+          .hospitals-container
+            .result
+          .hospital-container
+            .result
+                   
           
-
+  #result
 
 block scripts
   script(src="http://d3js.org/d3.v3.min.js")
@@ -52,5 +56,7 @@ block scripts
         $(".filter-link").fadeTo(fadeTime,.8)
       }
     });
+    $(".hospitals-container .result").load('/hospitals/ALL/All');
+    
        
   

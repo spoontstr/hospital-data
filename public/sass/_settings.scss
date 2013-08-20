@@ -52,9 +52,9 @@ $em-base: 16 !default;
 $default-float: left;
 
 // $body-bg: #fff;
-$body-font-color: #333;
+$body-font-color: $text-color;
 $body-font-family: "proxima-nova-condensed", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-// $body-font-weight: normal;
+$body-font-weight: 300;
 // $body-font-style: normal;
 
 // Font-smoothing

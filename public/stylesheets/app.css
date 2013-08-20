@@ -430,11 +430,11 @@ body {
 /* line 272, ../../../../.rvm/gems/ruby-2.0.0-p247/gems/zurb-foundation-4.3.1/scss/foundation/components/_global.scss */
 body {
   background: white;
-  color: #333333;
+  color: #444444;
   padding: 0;
   margin: 0;
   font-family: "proxima-nova-condensed", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-  font-weight: normal;
+  font-weight: 300;
   font-style: normal;
   line-height: 1;
   position: relative;
@@ -2192,7 +2192,7 @@ abbr,
 acronym {
   text-transform: uppercase;
   font-size: 90%;
-  color: #333333;
+  color: #444444;
   border-bottom: 1px dotted #dddddd;
   cursor: help;
 }
