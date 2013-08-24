@@ -33,18 +33,30 @@ function mapStates() {
   function ready(error, us, centroids){
     g.append("g")
      .attr("class","states-map")
+     .style("opacity", 0)
      .selectAll("path")
      .data(topojson.feature(us, us.objects.state).features)
      .enter().append("path")
      .attr("id", function(d) { return d.properties.STUSPS10 })
      .attr("d", path)
      .on("click", mapClicked)
-  
-      
+
     g.append("path")
      .datum(topojson.mesh(us, us.objects.state, function(a, b) { return a !== b; }))
      .attr("class", "state-borders")
-     .attr("d", path);
+     .style("opacity", 0)
+     .attr("d", path)
+   
+     var fadeInMap = d3.transition().duration(1000).each( function() {
+       g.select(".states-map")
+        .transition()
+        .style("opacity",1);
+     })
+     var fadeInBorders = fadeInMap.transition().duration(300).each( function() {
+       g.select(".state-borders")
+        .transition()
+        .style("opacity",1);
+    })
   }
 }
 function mapHospitals(state, duration) {
