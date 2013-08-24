@@ -1,44 +1,52 @@
 /* line 6, ../sass/main.scss */
+#hospital-map-result {
+  display: none;
+}
+
+/* line 9, ../sass/main.scss */
 header {
   background-color: #293239;
   height: 70px;
   text-align: right;
 }
-/* line 10, ../sass/main.scss */
+/* line 13, ../sass/main.scss */
 header h1 {
   text-align: left;
-  margin: 0 0 0 0.875em;
+  margin: 0 0 0 0.05em;
   line-height: 70px;
   color: #f7f9f7;
 }
 
-/* line 17, ../sass/main.scss */
+/* line 20, ../sass/main.scss */
 .header-container {
   display: none;
   vertical-align: bottom;
   height: 100%;
 }
 
-/* line 22, ../sass/main.scss */
+/* line 25, ../sass/main.scss */
 html, body, .content-container {
   height: 100%;
 }
 
-/* line 25, ../sass/main.scss */
+/* line 28, ../sass/main.scss */
 body, .content-container {
   background-color: #d4d9d3;
 }
 
-/* line 29, ../sass/main.scss */
-.header-container .filter-link-container {
-  height: 100%;
-  margin-right: -0.9375em;
+/* line 31, ../sass/main.scss */
+.content-container {
+  min-width: 1200px;
 }
-/* line 32, ../sass/main.scss */
+
+/* line 35, ../sass/main.scss */
+.header-container .filter-link-container {
+  display: inline-block;
+  height: 100%;
+}
+/* line 38, ../sass/main.scss */
 .header-container .filter-link-container .filter-link {
-  position: absolute;
-  bottom: 1.5em;
-  right: 0;
+  line-height: 5em;
   font-size: 0.875em;
   font-weight: 300;
   background: rgba(255, 255, 255, 0.4);
@@ -47,79 +55,140 @@ body, .content-container {
   opacity: 0.6;
   padding: 0.5em 2em;
 }
-/* line 42, ../sass/main.scss */
+/* line 46, ../sass/main.scss */
 .header-container .filter-link-container .filter-link:hover {
   color: white;
 }
+/* line 51, ../sass/main.scss */
+.header-container .instructions {
+  display: inline-block;
+  padding-right: 5em;
+  color: #979997;
+  line-height: 5em;
+  font-size: 0.875em;
+}
 
-/* line 48, ../sass/main.scss */
+/* line 59, ../sass/main.scss */
 .filter-container {
   position: absolute;
   z-index: 2;
   top: 0;
   left: 0;
   right: 0;
-  margin-right: -0.9375em;
-  margin-left: 2em;
   background-color: rgba(255, 255, 255, 0.6);
+  margin: 0 1.25em;
   padding: 1.25em;
   display: none;
 }
 
-/* line 62, ../sass/main.scss */
-.map-container .background {
+/* line 70, ../sass/main.scss */
+.nav {
+  padding: 1.25em 2em 0 0.15em;
+  height: 3.5em;
+  text-align: right;
+}
+
+/* line 75, ../sass/main.scss */
+.legend {
+  position: absolute;
+  bottom: 0em;
+  width: 100%;
+}
+/* line 79, ../sass/main.scss */
+.legend h6 {
+  color: #444444;
+  font-weight: 400;
+}
+
+/* line 86, ../sass/main.scss */
+.value-range div,
+.value-range-legend div {
+  display: inline-block;
+  width: 36px;
+  height: 8px;
+}
+
+/* line 93, ../sass/main.scss */
+.value-range-legend div {
+  font-size: 0.75em;
+  text-align: center;
+  font-weight: 400;
+}
+/* line 98, ../sass/main.scss */
+.value-range-legend div.caption-sub {
+  width: 90px;
+  height: 0.875em;
+  font-weight: 400;
+}
+/* line 102, ../sass/main.scss */
+.value-range-legend div.caption-sub.best {
+  text-align: left;
+}
+/* line 105, ../sass/main.scss */
+.value-range-legend div.caption-sub.worst {
+  text-align: right;
+}
+
+/* line 110, ../sass/main.scss */
+.hospital_map {
+  margin-left: 0;
+}
+/* line 112, ../sass/main.scss */
+.hospital_map .background {
   fill: #d4d9d3;
   pointer-events: all;
 }
-/* line 66, ../sass/main.scss */
-.map-container .hospital-location {
+/* line 116, ../sass/main.scss */
+.hospital_map .hospital-location {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
   opacity: 0.7;
 }
-/* line 69, ../sass/main.scss */
-.map-container .hospital-location.active {
+/* line 119, ../sass/main.scss */
+.hospital_map .hospital-location.active {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
 }
-/* line 72, ../sass/main.scss */
-.map-container .hospital-location.inactive {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=10);
-  opacity: 0.1;
-}
 
-/* line 77, ../sass/main.scss */
+/* line 124, ../sass/main.scss */
 .data-container {
-  margin-right: -0.9375em;
-  margin-left: -0.9375em;
   padding: 0;
-  height: 42.188em;
+  height: 715px;
   background-color: rgba(255, 255, 255, 0.4);
   overflow-y: scroll;
 }
-/* line 85, ../sass/main.scss */
+/* line 130, ../sass/main.scss */
 .data-container .hospitals-container {
-  padding: 1.25em 1.25em;
+  padding: 0.625em 1.25em;
 }
-/* line 87, ../sass/main.scss */
+/* line 132, ../sass/main.scss */
 .data-container .hospitals-container h4 {
   color: #444444;
 }
-/* line 90, ../sass/main.scss */
+/* line 135, ../sass/main.scss */
 .data-container .hospitals-container li {
   list-style: none;
-  margin: 0.625em 0 0 0;
+  margin: 0.625em 0 0 1.25em;
   padding: 0;
   font-size: 0.875em;
   line-height: 1.2em;
 }
-/* line 98, ../sass/main.scss */
+/* line 142, ../sass/main.scss */
+.data-container .hospitals-container a.hospital-link {
+  margin-right: 1.25em;
+}
+/* line 145, ../sass/main.scss */
+.data-container .hospitals-container a.hospital-link.active {
+  color: #326e91;
+  margin-right: 1.25em;
+}
+/* line 150, ../sass/main.scss */
 .data-container .hospital-container {
   display: none;
 }
-/* line 100, ../sass/main.scss */
+/* line 152, ../sass/main.scss */
 .data-container .hospital-container h4 {
   margin: 0;
-  padding: 0.625em 0.9375em;
+  padding: 0.625em 1.25em;
   font-size: 21px;
   width: 100%;
   background-color: #a3a5a2;
@@ -129,20 +198,20 @@ body, .content-container {
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
 }
-/* line 108, ../sass/main.scss */
+/* line 160, ../sass/main.scss */
 .data-container .hospital-container h5 {
   display: inline-block;
   color: #444444;
 }
-/* line 112, ../sass/main.scss */
+/* line 164, ../sass/main.scss */
 .data-container .hospital-container .address-container {
   padding: 1.25em 0 0.625em 0;
 }
-/* line 116, ../sass/main.scss */
+/* line 168, ../sass/main.scss */
 .data-container .hospital-container .ratings-container .value {
   padding-left: 0.75em;
 }
-/* line 119, ../sass/main.scss */
+/* line 171, ../sass/main.scss */
 .data-container .hospital-container .ratings-container .label {
   width: 100%;
   text-align: center;
@@ -150,7 +219,7 @@ body, .content-container {
   background-color: transparent;
   color: #444444;
 }
-/* line 127, ../sass/main.scss */
+/* line 179, ../sass/main.scss */
 .data-container .hospital-container .rating {
   text-align: center;
   width: 60px;
@@ -162,24 +231,24 @@ body, .content-container {
   -o-border-radius: 60px;
   border-radius: 60px;
 }
-/* line 135, ../sass/main.scss */
+/* line 187, ../sass/main.scss */
 .data-container .hospital-container .cost-rating,
 .data-container .hospital-container .quality-rating {
   background-color: rgba(255, 255, 255, 0.6);
   color: #a3a5a2;
 }
 
-/* line 143, ../sass/main.scss */
-#states {
+/* line 193, ../sass/main.scss */
+.states-map {
   fill: #edefed;
 }
-/* line 145, ../sass/main.scss */
-#states .active {
-  fill: #e2e3e3;
+/* line 195, ../sass/main.scss */
+.states-map .active {
+  fill: #e3e5e3;
 }
 
-/* line 149, ../sass/main.scss */
-#state-borders {
+/* line 199, ../sass/main.scss */
+.state-borders {
   fill: none;
   stroke: #D4D9D3;
   stroke-width: 1px;
@@ -188,50 +257,32 @@ body, .content-container {
   pointer-events: none;
 }
 
-/* line 158, ../sass/main.scss */
-#value-slider,
-#value-range {
-  clear: both;
-}
-/* line 160, ../sass/main.scss */
-#value-slider div,
-#value-range div {
-  float: left;
-  width: 36px;
-  height: 12px;
-}
-
-/* line 167, ../sass/main.scss */
-#value-range div {
-  height: 8px;
-}
-
-/* line 171, ../sass/main.scss */
+/* line 208, ../sass/main.scss */
 .value-5 {
   fill: #00384f;
   background-color: #00384f;
 }
 
-/* line 175, ../sass/main.scss */
+/* line 212, ../sass/main.scss */
 .value-4 {
   fill: #0f7199;
   background-color: #0f7199;
 }
 
-/* line 179, ../sass/main.scss */
+/* line 216, ../sass/main.scss */
 .value-3 {
   fill: #289dcc;
   background-color: #289dcc;
 }
 
-/* line 183, ../sass/main.scss */
+/* line 220, ../sass/main.scss */
 .value-2 {
   fill: #5bbee5;
   background-color: #5bbee5;
 }
 
-/* line 187, ../sass/main.scss */
+/* line 224, ../sass/main.scss */
 .value-1 {
-  fill: #bfe2ef;
-  background-color: #bfe2ef;
+  fill: #8ed3ed;
+  background-color: #8ed3ed;
 }
