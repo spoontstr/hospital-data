@@ -1,8 +1,19 @@
 if hospitals && hospitals.length != 0
   ul
-    h4 Top Value Hospitals #{state ? 'in ' + state : ''}
+    h4 Top Value Hospitals #{(usps_state !== "ALL") ? hospitals[0].state_longname  : 'the US'}
     - each hospital in hospitals
       li
         .row 
-          .large-10.columns= hospital.name
-          .large-2.columns= hospital.value_rating
+          .large-11.columns
+            a.hospital-link(href="javascript:void(0)", data-id="#{hospital.provider_no}")= hospital.name
+          .large-1.columns= hospital.value_rating
+
+block scripts
+  script
+    var duration = 800;
+    $('.hospital-link').click(function(){
+      $(this).addClass("active")
+      var id = $(this).data("id")
+      var p1 = d3.select("#h" + id).datum()
+      mapClicked(p1)
+    })

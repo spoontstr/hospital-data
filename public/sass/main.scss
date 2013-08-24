@@ -1,15 +1,18 @@
 @import "_colors";
 @import "compass/css3/opacity";
 @import "compass/css3/border-radius";
-@import "compass/utilities/text/ellipsis";
+@import "compass/typography/text/ellipsis";
 
+#hospital-map-result {
+  display: none;
+}
 header {
   background-color: $header-background;
   height: 70px;
   text-align: right;
   h1 {
     text-align: left;
-    margin: 0 0 0 0.875em;
+    margin: 0 0 0 0.05em;
     line-height: 70px;
     color: $header-text;
   }
@@ -25,40 +28,87 @@ html, body, .content-container {
 body, .content-container {
   background-color: $background;
 }
-
-.header-container .filter-link-container {
-  height: 100%;
-  margin-right: - 0.9375em;
-  .filter-link {
-    position: absolute;
-    bottom: 1.5em;
-    right: 0;
-    font-size: 0.875em;
-    font-weight: 300;
-    background: $white-40;
-    color: $white;
-    @include opacity(.6);
-    padding: 0.5em 2em;
-    &:hover {
+.content-container {
+  min-width: 1200px;
+}
+.header-container {
+  .filter-link-container {
+    display: inline-block;
+    height: 100%;
+    .filter-link {
+      line-height: 5em;
+      font-size: 0.875em;
+      font-weight: 300;
+      background: $white-40;
       color: $white;
+      @include opacity(.6);
+      padding: 0.5em 2em;
+      &:hover {
+        color: $white;
+      }
     }
   }
+  .instructions {
+    display: inline-block;
+    padding-right: 5em;
+    color: $grey-40;
+    line-height: 5em;
+    font-size: 0.875em;
+  }
 }
-
 .filter-container {
   position: absolute;
   z-index: 2;
   top: 0;
   left: 0;
   right: 0;
-  margin-right: - 0.9375em;
-  margin-left: 2em;
   background-color: $white-60;
+  margin: 0 1.25em;
   padding: 1.25em;
   display: none;
 }
-
-.map-container {
+.nav {
+  padding: 1.25em 2em 0 0.15em;
+  height: 3.5em;
+  text-align: right;
+}
+.legend {
+  position: absolute;
+  bottom: 0em;
+  width: 100%;
+  h6 {
+    color: $text-color;
+    font-weight: 400;
+  }
+}
+.value-range,
+.value-range-legend {
+  div {
+    display: inline-block;
+    width: 36px;
+    height: 8px;
+  }
+}   
+.value-range-legend {
+  div {
+    font-size: 0.75em;
+    text-align: center;
+    font-weight: 400;
+  }
+  div.caption-sub {
+    width: 90px;
+    height: 0.875em;
+    font-weight: 400;
+    &.best {
+      text-align: left;
+    }
+    &.worst {
+      text-align: right;
+    }
+  }
+} 
+.hospital_map {
+  margin-left: 0;
   .background {
     fill: $background;
     pointer-events: all;
@@ -69,37 +119,39 @@ body, .content-container {
   .hospital-location.active {
     @include opacity(1);
   }
-  .hospital-location.inactive {
-    @include opacity(.1);
-  }
 }
 
 .data-container  {
-  margin-right: - 0.9375em;
-  margin-left: - 0.9375em;
   padding: 0;
-  height: 42.188em;
+  height: 715px;
   background-color: $white-40;
   overflow-y: scroll;
   
   .hospitals-container {
-    padding: 1.25em 1.25em;
+    padding: 0.625em 1.25em;
     h4 {
       color: $text-color;
     }
     li {
       list-style: none;
-      margin: 0.625em 0 0 0;
+      margin: 0.625em 0 0 1.25em;
       padding: 0;
       font-size: 0.875em;
       line-height: 1.2em;
+    }
+    a.hospital-link {
+      margin-right: 1.25em;
+    }
+    a.hospital-link.active {
+      color: $selected-link;
+      margin-right: 1.25em;
     }
   }
   .hospital-container {
     display: none;
     h4 {
       margin: 0;
-      padding: 0.625em 0.9375em;
+      padding: 0.625em 1.25em;
       font-size: 21px;
       width: 100%;
       background-color: $background-accent;
@@ -138,15 +190,13 @@ body, .content-container {
     }
   }
 }
-
-
-#states {
+.states-map {
   fill: $states;
   .active {
     fill: $states-active;
   }
 }
-#state-borders {
+.state-borders {
   fill: none;
   stroke: #D4D9D3;
   stroke-width: 1px;
@@ -154,20 +204,7 @@ body, .content-container {
   stroke-linecap: round;
   pointer-events: none;
 }
-#value-slider,
-#value-range {
-  clear: both;
-  div {
-    float: left;
-    width: 36px;
-    height: 12px;
-  }
-}
-#value-range {
-  div {
-    height: 8px;
-  }
-}
+
 .value-5 {
   fill: $value-5;
   background-color: $value-5;
