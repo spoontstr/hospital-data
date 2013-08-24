@@ -1,6 +1,6 @@
 var h;
-var width = 880, 
-    height = 659,
+var width = 860, 
+    height = 660,
     centered
   
 var projection = d3.geo.albersUsa()
@@ -33,7 +33,6 @@ function mapStates() {
   function ready(error, us, centroids){
     g.append("g")
      .attr("class","states-map")
-     .style("opacity", 0)
      .selectAll("path")
      .data(topojson.feature(us, us.objects.state).features)
      .enter().append("path")
@@ -44,19 +43,8 @@ function mapStates() {
     g.append("path")
      .datum(topojson.mesh(us, us.objects.state, function(a, b) { return a !== b; }))
      .attr("class", "state-borders")
-     .style("opacity", 0)
      .attr("d", path)
    
-     var fadeInMap = d3.transition().duration(1000).each( function() {
-       g.select(".states-map")
-        .transition()
-        .style("opacity",1);
-     })
-     var fadeInBorders = fadeInMap.transition().duration(300).each( function() {
-       g.select(".state-borders")
-        .transition()
-        .style("opacity",1);
-    })
   }
 }
 function mapHospitals(state, duration) {
@@ -133,10 +121,9 @@ function mapClicked(d) {
       g.select("#h" + id).style("opacity", 1)
       
       if( $(".hospitals-container").is(":visible") ) {
-        $(".hospitals-container").fadeOut(100, function() {
-          $(".hospital-container").fadeIn(500)
-        })
+        outAllInOneHospital()
       }
+      
     })
   }
   else {
@@ -149,16 +136,29 @@ function mapClicked(d) {
         usps_state = d.properties.STUSPS10
       }
     }
-
-    console.log("getting state " + usps_state)
+    filterState = usps_state
       
-    mapHospitals(usps_state);
+    mapHospitals(usps_state)
     
-    $.get('/hospitals/' + usps_state, function(res) {
+    var value = "" 
+    if(filterValueRatings != ""){
+      value = "?int_value_rating=" + filterValueRatings;
+    }
+    
+    console.log('/hospitals/' + usps_state + value);
+    $.get('/hospitals/' + usps_state + value, function(res) {
       $(".hospitals-container .result").html(res)
-      $(".hospital-container").fadeOut(500, function() {
-        $(".hospitals-container").fadeIn(100)
-      });
+      outOneInAllHospitals()
     })
   }
+}
+function outAllInOneHospital(){
+  $(".hospitals-container").fadeOut(500, function() {
+    $(".hospital-container").fadeIn(100)
+  });
+}
+function outOneInAllHospitals(){
+  $(".hospital-container").fadeOut(500, function() {
+    $(".hospitals-container").fadeIn(100)
+  });
 }

@@ -429,11 +429,11 @@ body {
 
 /* line 272, ../../../../.rvm/gems/ruby-2.0.0-p247/gems/zurb-foundation-4.3.1/scss/foundation/components/_global.scss */
 body {
-  background: white;
+  background: #5f6a73;
   color: #444444;
   padding: 0;
   margin: 0;
-  font-family: "proxima-nova-condensed", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-family: "proxima-nova-condensed", "Arial Narrow", "Helvetica", Helvetica, Arial, sans-serif;
   font-weight: 300;
   font-style: normal;
   line-height: 1;
@@ -2037,7 +2037,7 @@ p aside {
 /* Default header styles */
 /* line 181, ../../../../.rvm/gems/ruby-2.0.0-p247/gems/zurb-foundation-4.3.1/scss/foundation/components/_type.scss */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "proxima-nova-extra-condensed", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-family: "proxima-nova-extra-condensed", "Arial Narrow", "Georgia", Helvetica, Arial, sans-serif;
   font-weight: 600;
   font-style: normal;
   color: #f7f9f7;

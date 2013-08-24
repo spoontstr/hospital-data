@@ -28,10 +28,10 @@ HospitalProvider.prototype.getCollection= function(callback) {
 
 HospitalProvider.prototype.findAll = function(filter,sort,max,callback) {
     this.getCollection(function(error, hospital_collection) {
-      if( error ) callback(error)
+      if( error ) console.log(error)
       else {
         hospital_collection.find(filter,sort).limit(max).toArray(function(error, results) {
-          if( error ) callback(error)
+          if( error ) console.log(error)
           else callback(null, results)
         });
       }

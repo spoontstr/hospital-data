@@ -1,15 +1,44 @@
-/* line 6, ../sass/main.scss */
-#hospital-map-result {
-  display: none;
+/* line 5, ../sass/main.scss */
+html, body, .content-container {
+  height: 100%;
 }
 
-/* line 9, ../sass/main.scss */
+/* line 8, ../sass/main.scss */
+body, .content-container {
+  background-color: #d4d9d3;
+}
+
+/* line 11, ../sass/main.scss */
+h6 {
+  color: #444444;
+  font-weight: 400;
+  display: inline-block;
+}
+
+/* line 16, ../sass/main.scss */
+.caption {
+  font-size: 0.75em;
+  color: #656664;
+  display: inline-block;
+}
+
+/* line 21, ../sass/main.scss */
+.icon-close {
+  width: 15px;
+  height: 15px;
+  background-image: url("/images/close.svg");
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: 15px;
+}
+
+/* line 29, ../sass/main.scss */
 header {
   background-color: #293239;
   height: 70px;
   text-align: right;
 }
-/* line 13, ../sass/main.scss */
+/* line 33, ../sass/main.scss */
 header h1 {
   text-align: left;
   margin: 0 0 0 0.05em;
@@ -17,34 +46,24 @@ header h1 {
   color: #f7f9f7;
 }
 
-/* line 20, ../sass/main.scss */
+/* line 40, ../sass/main.scss */
 .header-container {
-  display: none;
+  position: relative;
   vertical-align: bottom;
   height: 100%;
 }
 
-/* line 25, ../sass/main.scss */
-html, body, .content-container {
-  height: 100%;
-}
-
-/* line 28, ../sass/main.scss */
-body, .content-container {
-  background-color: #d4d9d3;
-}
-
-/* line 31, ../sass/main.scss */
+/* line 46, ../sass/main.scss */
 .content-container {
   min-width: 1200px;
 }
 
-/* line 35, ../sass/main.scss */
+/* line 50, ../sass/main.scss */
 .header-container .filter-link-container {
   display: inline-block;
   height: 100%;
 }
-/* line 38, ../sass/main.scss */
+/* line 53, ../sass/main.scss */
 .header-container .filter-link-container .filter-link {
   line-height: 5em;
   font-size: 0.875em;
@@ -55,11 +74,11 @@ body, .content-container {
   opacity: 0.6;
   padding: 0.5em 2em;
 }
-/* line 46, ../sass/main.scss */
+/* line 61, ../sass/main.scss */
 .header-container .filter-link-container .filter-link:hover {
   color: white;
 }
-/* line 51, ../sass/main.scss */
+/* line 66, ../sass/main.scss */
 .header-container .instructions {
   display: inline-block;
   padding-right: 5em;
@@ -68,127 +87,177 @@ body, .content-container {
   font-size: 0.875em;
 }
 
-/* line 59, ../sass/main.scss */
+/* line 74, ../sass/main.scss */
 .filter-container {
+  background-color: rgba(255, 255, 255, 0.8);
   position: absolute;
-  z-index: 2;
   top: 0;
   left: 0;
   right: 0;
-  background-color: rgba(255, 255, 255, 0.6);
-  margin: 0 1.25em;
+  z-index: 2;
+  margin: 0 0.9375em;
   padding: 1.25em;
-  display: none;
+}
+/* line 84, ../sass/main.scss */
+.filter-container .caption {
+  padding-left: 4.9em;
+}
+/* line 88, ../sass/main.scss */
+.filter-container .value-range .value {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+  opacity: 0.3;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+  border-radius: 30px;
+  margin-right: 0.25em;
+  width: 25px;
+  height: 25px;
+}
+/* line 94, ../sass/main.scss */
+.filter-container .value-range .value.active {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+  opacity: 1;
+  background-image: url("/images/checkmark.svg");
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: 15px;
 }
 
-/* line 70, ../sass/main.scss */
+/* line 104, ../sass/main.scss */
 .nav {
   padding: 1.25em 2em 0 0.15em;
   height: 3.5em;
   text-align: right;
 }
 
-/* line 75, ../sass/main.scss */
+/* line 109, ../sass/main.scss */
 .legend {
   position: absolute;
-  bottom: 0em;
+  bottom: 1em;
   width: 100%;
 }
-/* line 79, ../sass/main.scss */
-.legend h6 {
-  color: #444444;
-  font-weight: 400;
-}
 
-/* line 86, ../sass/main.scss */
-.value-range div,
-.value-range-legend div {
+/* line 116, ../sass/main.scss */
+.value-range .value,
+.value-range-legend .value {
   display: inline-block;
   width: 36px;
   height: 8px;
 }
 
-/* line 93, ../sass/main.scss */
-.value-range-legend div {
+/* line 123, ../sass/main.scss */
+.value-range-legend .value {
   font-size: 0.75em;
   text-align: center;
   font-weight: 400;
 }
-/* line 98, ../sass/main.scss */
-.value-range-legend div.caption-sub {
+/* line 128, ../sass/main.scss */
+.value-range-legend .value.caption-sub {
   width: 90px;
   height: 0.875em;
   font-weight: 400;
 }
-/* line 102, ../sass/main.scss */
-.value-range-legend div.caption-sub.best {
+/* line 132, ../sass/main.scss */
+.value-range-legend .value.caption-sub.best {
   text-align: left;
 }
-/* line 105, ../sass/main.scss */
-.value-range-legend div.caption-sub.worst {
+/* line 135, ../sass/main.scss */
+.value-range-legend .value.caption-sub.worst {
   text-align: right;
 }
 
-/* line 110, ../sass/main.scss */
+/* line 140, ../sass/main.scss */
+.value-5 {
+  fill: #00384f;
+  background-color: #00384f;
+}
+
+/* line 144, ../sass/main.scss */
+.value-4 {
+  fill: #0f7199;
+  background-color: #0f7199;
+}
+
+/* line 148, ../sass/main.scss */
+.value-3 {
+  fill: #289dcc;
+  background-color: #289dcc;
+}
+
+/* line 152, ../sass/main.scss */
+.value-2 {
+  fill: #5bbee5;
+  background-color: #5bbee5;
+}
+
+/* line 156, ../sass/main.scss */
+.value-1 {
+  fill: #8ed3ed;
+  background-color: #8ed3ed;
+}
+
+/* line 160, ../sass/main.scss */
 .hospital_map {
   margin-left: 0;
 }
-/* line 112, ../sass/main.scss */
+/* line 162, ../sass/main.scss */
 .hospital_map .background {
   fill: #d4d9d3;
   pointer-events: all;
 }
-/* line 116, ../sass/main.scss */
+/* line 166, ../sass/main.scss */
 .hospital_map .hospital-location {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
   opacity: 0.7;
 }
-/* line 119, ../sass/main.scss */
+/* line 169, ../sass/main.scss */
 .hospital_map .hospital-location.active {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
 }
 
-/* line 124, ../sass/main.scss */
+/* line 174, ../sass/main.scss */
 .data-container {
   padding: 0;
   height: 715px;
   background-color: rgba(255, 255, 255, 0.4);
   overflow-y: scroll;
 }
-/* line 130, ../sass/main.scss */
+/* line 180, ../sass/main.scss */
 .data-container .hospitals-container {
-  padding: 0.625em 1.25em;
+  padding: 0.625em 1.5em 0.625em 1.25em;
 }
-/* line 132, ../sass/main.scss */
+/* line 182, ../sass/main.scss */
 .data-container .hospitals-container h4 {
   color: #444444;
 }
-/* line 135, ../sass/main.scss */
+/* line 185, ../sass/main.scss */
 .data-container .hospitals-container li {
   list-style: none;
-  margin: 0.625em 0 0 1.25em;
+  margin: 0.625em 0 0 1em;
   padding: 0;
   font-size: 0.875em;
   line-height: 1.2em;
 }
-/* line 142, ../sass/main.scss */
+/* line 192, ../sass/main.scss */
 .data-container .hospitals-container a.hospital-link {
   margin-right: 1.25em;
 }
-/* line 145, ../sass/main.scss */
+/* line 195, ../sass/main.scss */
 .data-container .hospitals-container a.hospital-link.active {
   color: #326e91;
   margin-right: 1.25em;
 }
-/* line 150, ../sass/main.scss */
+/* line 200, ../sass/main.scss */
 .data-container .hospital-container {
   display: none;
 }
-/* line 152, ../sass/main.scss */
+/* line 202, ../sass/main.scss */
 .data-container .hospital-container h4 {
   margin: 0;
-  padding: 0.625em 1.25em;
+  padding: 0.625em 0.952em;
   font-size: 21px;
   width: 100%;
   background-color: #a3a5a2;
@@ -198,20 +267,20 @@ body, .content-container {
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
 }
-/* line 160, ../sass/main.scss */
+/* line 210, ../sass/main.scss */
 .data-container .hospital-container h5 {
   display: inline-block;
   color: #444444;
 }
-/* line 164, ../sass/main.scss */
+/* line 214, ../sass/main.scss */
 .data-container .hospital-container .address-container {
   padding: 1.25em 0 0.625em 0;
 }
-/* line 168, ../sass/main.scss */
+/* line 218, ../sass/main.scss */
 .data-container .hospital-container .ratings-container .value {
   padding-left: 0.75em;
 }
-/* line 171, ../sass/main.scss */
+/* line 221, ../sass/main.scss */
 .data-container .hospital-container .ratings-container .label {
   width: 100%;
   text-align: center;
@@ -219,7 +288,7 @@ body, .content-container {
   background-color: transparent;
   color: #444444;
 }
-/* line 179, ../sass/main.scss */
+/* line 229, ../sass/main.scss */
 .data-container .hospital-container .rating {
   text-align: center;
   width: 60px;
@@ -231,23 +300,23 @@ body, .content-container {
   -o-border-radius: 60px;
   border-radius: 60px;
 }
-/* line 187, ../sass/main.scss */
+/* line 237, ../sass/main.scss */
 .data-container .hospital-container .cost-rating,
 .data-container .hospital-container .quality-rating {
   background-color: rgba(255, 255, 255, 0.6);
   color: #a3a5a2;
 }
 
-/* line 193, ../sass/main.scss */
+/* line 243, ../sass/main.scss */
 .states-map {
   fill: #edefed;
 }
-/* line 195, ../sass/main.scss */
+/* line 245, ../sass/main.scss */
 .states-map .active {
   fill: #e3e5e3;
 }
 
-/* line 199, ../sass/main.scss */
+/* line 249, ../sass/main.scss */
 .state-borders {
   fill: none;
   stroke: #D4D9D3;
@@ -257,32 +326,34 @@ body, .content-container {
   pointer-events: none;
 }
 
-/* line 208, ../sass/main.scss */
-.value-5 {
-  fill: #00384f;
-  background-color: #00384f;
+/* line 257, ../sass/main.scss */
+#hospital-map-result {
+  display: none;
 }
 
-/* line 212, ../sass/main.scss */
-.value-4 {
-  fill: #0f7199;
-  background-color: #0f7199;
+/* line 260, ../sass/main.scss */
+#error {
+  display: none;
+  position: absolute;
+  z-index: 100;
+  top: 55px;
+  margin-left: -400px;
+  height: 60px;
+  width: 720px;
+  left: 50%;
+  border: 1px solid #cc1700;
+  background: rgba(255, 255, 255, 0.9);
 }
-
-/* line 216, ../sass/main.scss */
-.value-3 {
-  fill: #289dcc;
-  background-color: #289dcc;
+/* line 262, ../sass/main.scss */
+#error .message {
+  line-height: 60px;
+  font-size: 1.125em;
+  font-weight: 300;
+  color: #656664;
 }
-
-/* line 220, ../sass/main.scss */
-.value-2 {
-  fill: #5bbee5;
-  background-color: #5bbee5;
-}
-
-/* line 224, ../sass/main.scss */
-.value-1 {
-  fill: #8ed3ed;
-  background-color: #8ed3ed;
+/* line 277, ../sass/main.scss */
+#error .icon-close {
+  margin: 0.5em 0;
+  text-align: right;
+  cursor: pointer;
 }
