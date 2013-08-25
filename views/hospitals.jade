@@ -1,12 +1,14 @@
 if hospitals && hospitals.length != 0
   ul
-    h4 Top Value Hospitals #{(usps_state !== "ALL") ? hospitals[0].state_longname  : 'the US'}
+    h4 #{(usps_state !== "ALL") ? hospitals[0].state_longname  : 'US'} Hospitals
     - each hospital in hospitals
       li
         .row 
-          .large-11.columns
+          .large-10.columns.name
             a.hospital-link(href="javascript:void(0)", data-id="#{hospital.provider_no}")= hospital.name
-          .large-1.columns= hospital.value_rating
+            .city-state-zip  #{hospital.city}, #{hospital.usps_state}
+          .large-2.columns.value-rating-container
+            .value(class="value-#{hospital.int_value_rating}")= hospital.value_rating 
 
 block scripts
   script

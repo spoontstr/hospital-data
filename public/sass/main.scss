@@ -2,36 +2,50 @@
 @import "compass/css3/opacity";
 @import "compass/css3/border-radius";
 @import "compass/typography/text/ellipsis";
-
-#hospital-map-result {
-  display: none;
+html, body, .content-container {
+  height: 100%;
+}
+body, .content-container {
+  min-width: 1200px;
+  //overflow: hidden;
+}
+.content-container {
+ background-color: $background;
+}
+h6 {
+  color: $text-color;
+  font-weight: 400;
+  display: inline-block;
+}
+.caption {
+  font-size: 0.75em;
+  color: $grey-60;
+  display: inline-block;
+}
+.icon-close {
+  width: 15px;
+  height: 15px;
+  background-image: url("/images/close.svg");
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: 15px;
 }
 header {
   background-color: $header-background;
   height: 70px;
   text-align: right;
   h1 {
+    margin: 0;
     text-align: left;
-    margin: 0 0 0 0.05em;
     line-height: 70px;
     color: $header-text;
   }
 }
 .header-container {
-  display: none;
+  padding-left: 1.25em;
+  position: relative;
   vertical-align: bottom;
   height: 100%;
-}
-html, body, .content-container {
-  height: 100%;
-}
-body, .content-container {
-  background-color: $background;
-}
-.content-container {
-  min-width: 1200px;
-}
-.header-container {
   .filter-link-container {
     display: inline-block;
     height: 100%;
@@ -57,15 +71,24 @@ body, .content-container {
   }
 }
 .filter-container {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: $white-60;
-  margin: 0 1.25em;
-  padding: 1.25em;
+  background-color: $white-80;
+  padding: 0.625em 3em;
   display: none;
+  .caption {
+    padding-left: 4.9em;
+  }
+  .value {
+    @include opacity(.6);
+    width: 25px;
+    height: 25px;
+    &.active {
+      @include opacity(1);
+      background-image: url("/images/checkmark.svg");
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      background-size: 15px;
+    }
+  }
 }
 .nav {
   padding: 1.25em 2em 0 0.15em;
@@ -74,39 +97,69 @@ body, .content-container {
 }
 .legend {
   position: absolute;
-  bottom: 0em;
-  width: 100%;
-  h6 {
-    color: $text-color;
-    font-weight: 400;
-  }
+  left: 3.125em;
+  bottom: 1.25em;
+  width: 500px
 }
-.value-range,
-.value-range-legend {
-  div {
-    display: inline-block;
+.value {
+  @include border-radius(30px);
+  display: inline-block;
+  color: $white;
+  text-align: center;
+  line-height: 30px;
+  margin-right: 0.25em;
+  width: 30px;
+  height: 30px;
+}  
+.value-range {
+  .value {
+    @include border-radius(0);
     width: 36px;
     height: 8px;
+    margin: 0;
   }
-}   
+}
 .value-range-legend {
-  div {
-    font-size: 0.75em;
+  .caption {
+    width: 36px;
     text-align: center;
     font-weight: 400;
   }
-  div.caption-sub {
+  .caption-sub {
+    font-size: 0.75em;
     width: 90px;
-    height: 0.875em;
-    font-weight: 400;
-    &.best {
+    display: inline-block;
+    &.worst {
       text-align: left;
     }
-    &.worst {
+    &.best {
       text-align: right;
     }
   }
 } 
+.value-5 {
+  fill: $value-5;
+  background-color: $value-5;
+}
+.value-4 {
+  fill: $value-4;
+  background-color: $value-4;
+}
+.value-3 {
+  fill: $value-3;
+  background-color: $value-3;
+}
+.value-2 {
+  fill: $value-2;
+  background-color: $value-2;
+}
+.value-1 {
+  fill: $value-1;
+  background-color: $value-1;
+}
+.content-container {
+  min-width: 1200px;
+}
 .hospital_map {
   margin-left: 0;
   .background {
@@ -120,39 +173,48 @@ body, .content-container {
     @include opacity(1);
   }
 }
-
 .data-container  {
   padding: 0;
-  height: 715px;
+  height: 680px;
   background-color: $white-40;
   overflow-y: scroll;
   
   .hospitals-container {
-    padding: 0.625em 1.25em;
+    padding: 0 1em 0 1.25em;
     h4 {
+      margin: 0;
+      padding: 0.625em 0 0.9375em 0;
       color: $text-color;
+      white-space: nowrap;
     }
     li {
       list-style: none;
-      margin: 0.625em 0 0 1.25em;
+      margin: 0 0.25em 1.3em 1em;
       padding: 0;
       font-size: 0.875em;
       line-height: 1.2em;
     }
-    a.hospital-link {
-      margin-right: 1.25em;
+    .value-rating-container {
+      text-align: right;
+      .value {
+        margin: 0;
+      }
+    }
+    .name {
+      padding: 0 1.25;
     }
     a.hospital-link.active {
       color: $selected-link;
-      margin-right: 1.25em;
+    }
+    .city-state-zip {
+      padding-top: 0.125em;
     }
   }
   .hospital-container {
     display: none;
     h4 {
       margin: 0;
-      padding: 0.625em 1.25em;
-      font-size: 21px;
+      padding: 0.625em 0.952em;
       width: 100%;
       background-color: $background-accent;
       @include ellipsis();
@@ -166,7 +228,10 @@ body, .content-container {
     }
     .ratings-container {
       .value {
-        padding-left: 0.75em;
+        height: auto;
+        width: auto;
+        margin: 0;
+        padding-left: 0.625em;
       }
       .label {
         width: 100%;
@@ -192,36 +257,41 @@ body, .content-container {
 }
 .states-map {
   fill: $states;
+  stroke: #D4D9D3;
   .active {
     fill: $states-active;
   }
 }
-.state-borders {
-  fill: none;
-  stroke: #D4D9D3;
-  stroke-width: 1px;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-  pointer-events: none;
+#hospital-map-result {
+  display: none;
 }
-
-.value-5 {
-  fill: $value-5;
-  background-color: $value-5;
+#error {
+  display: none;
+  .message {
+    line-height: 60px;
+    font-size: 1.125em;
+    font-weight: 300;
+    color: $grey-60;
+  }
+  position: absolute;
+  z-index: 100;
+  top: 55px;
+  margin-left: -400px;
+  height: 60px;
+  width: 720px;
+  left: 50%;
+  border: 1px solid $error;
+  background: $white-90;
+  .icon-close {
+    margin: 0.5em 0;
+    text-align: right;
+    cursor: pointer;
+  }
 }
-.value-4 {
-  fill: $value-4;
-  background-color: $value-4;
-}
-.value-3 {
-  fill: $value-3;
-  background-color: $value-3;
-}
-.value-2 {
-  fill: $value-2;
-  background-color: $value-2;
-}
-.value-1 {
-  fill: $value-1;
-  background-color: $value-1;
+footer {
+  padding: 1.25em 1.25em;
+  height:  100px;
+  color: $grey-40;
+  font-size: 0.875em;
+  background-color: $header-background;
 }

@@ -12,28 +12,25 @@ block header
       
    
 block content
-  .row.main-content
+  .main-content.row.collapse
     .large-12.columns.large-centered
       .filter-container
-        .row
-          .large-12.columns
-            #value-range
-              .value-1
-              .value-2
-              .value-3
-              .value-4
-              .value-5
-            #value-slider
-              .value-1.active(data-value="1")
-              .value-2.active(data-value="2")
-              .value-3.active(data-value="3")
-              .value-4.active(data-value="4")
-              .value-5.active(data-value="5")
+        .filters.row.collapse
+            .large-1.columns
+            .large-3.columns
+              h6 Value
+              .caption Click to filter
+              .filter-value-range
+                include includes/value-range
+            .large-2.columns  
+              h6 State  
+              include includes/state-dropdown 
+            .large-7.columns 
       .row.collapse
         .map-container.large-9.columns
           .row.nav
             .breadcrumb.large-12.columns
-          .row
+          .row.collapse
             .large-12.columns
               .result
                 .hospital_map
@@ -48,11 +45,7 @@ block content
            .large-6.columns 
              h6 Hospital Value
              .value-range
-               .value-1
-               .value-2
-               .value-3
-               .value-4
-               .value-5
+               include includes/value-range
              .value-range-legend
                .caption 1
                .caption 2
@@ -60,14 +53,23 @@ block content
                .caption 4
                .caption 5
              .value-range-legend
-               .caption-sub.best Best
-               .caption-sub.worst Worst
+               .caption-sub.worst Lowest
+               .caption-sub.best Highest
            .large-3.columns 
            .large-3.columns
              
           
-       
+  #error
+    .row
+      .message.large-11.columns
+      .large-1.columns.close.icon-close
+           
   #hospital-map-result
+
+block footer
+  .row.main-content
+    .large-12.columns
+        span &copy; 2103 R & S Collective
 
 block scripts
   script(src="http://d3js.org/d3.v3.min.js")
@@ -75,42 +77,82 @@ block scripts
   script(src="http://d3js.org/queue.v1.min.js")
   script(src="/javascripts/map.js")
   script
+    var filterValueRatings = ''
+    var filterState = ''
+    var defaultUspsState = 'ALL'
+    $("#error .close").click(function() {
+      $("#error").hide();
+    })
     $(".filter-link").click(function() {
       var fadeTime = 500;
+      var slideTime = 800;
       if($(".filter-container").is(":visible")){
-        $(".filter-container").slideUp(fadeTime);
+        $(".filter-container").slideUp(slideTime);
         $(".filter-link").fadeTo(fadeTime,.6)
       }
       else {
         $(".filter-container").slideDown(fadeTime);
         $(".filter-link").fadeTo(fadeTime,.8)
       }
-    });
-    //$(".header-container").fadeIn(3000);
-    $(".header-container").show();
-    $(".hospitals-container .result").load('/hospitals/ALL');
+    })
+    $(".filter-value-range .value").click(function(){
+      if(centered && centered.properties && centered.properties.value_rating != undefined){
+        $("#error .message").text("We're sorry. Unfortunately, you can't filter on value when a single hospital is selected");
+        $("#error").show();
+        return;
+      }
+      var values = []
+      var value = "" 
+      filterState = filterState != "" ? filterState : defaultUspsState;
+      
+      console.log("the filter state is" + filterState)
+      
+      $(this).toggleClass('active')
+      $(this).parent().find(".active").each(function(){
+        values.push($(this).data("int_value_rating"))
+      })
+      filterValueRatings = values.join(",");
+      
+      console.log("the filter value rating is" + filterState)
+
+      g.select("#hospital-locations")
+       .selectAll("path")
+       .style("opacity",.2);
+      
+      if(filterValueRatings != ""){
+        value = "?int_value_rating=" + filterValueRatings;
+      }
+    
+      var url = '/hospitals/'+ filterState + value;
+      console.log("the url is" + url)
+      $.get(url, function(data){
+        $(".hospitals-container .result").html(data);
+      })
+      
+      mapHospitals(filterState + value);
+    })
+    $('.state-selector').change(function(){
+      goToState($(this).val())
+    })
+    $('.hospitals-container .result').load('/hospitals/ALL');
     mapStates();
-    mapHospitals('ALL');
-    function hospitalsBack(usps_state) {
+    mapHospitals(defaultUspsState);
+    function goToState(usps_state) {
       var p1 = {}
-      var url = '/hospitals/' + usps_state;
-      if(usps_state !== 'ALL') {
+      var url = '/hospitals/' + usps_state
+      if(usps_state !== defaultUspsState) {
         p1 = d3.select("#" + usps_state).datum()
+        $('.state-selector').val(usps_state);
+        filterState = usps_state
+      }
+      else {
+        $('.state-selector').val(defaultUspsState);
+        filterState = defaultUspsState
       }
       mapClicked(p1)
       $(".hospitals-container .result").load(url);
-        if( $(".hospital-container").is(":visible") ) {
-          $(".hospital-container").fadeOut(100, function() {
-            $(".hospitals-container").fadeIn(500)
-          })
-        }
-              
-      /*d3.select("#hospital-locations")
-        .selectAll("path")
-        .transition()
-        .duration(800)
-        .style("opacity", 1)*/
     } 
+
     
        
   
