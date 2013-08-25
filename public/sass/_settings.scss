@@ -51,9 +51,9 @@ $em-base: 16 !default;
 
 $default-float: left;
 
-// $body-bg: #fff;
+$body-bg: $header-background;
 $body-font-color: $text-color;
-$body-font-family: "proxima-nova-condensed", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$body-font-family: "proxima-nova-condensed", "Arial Narrow", "Helvetica", Helvetica, Arial, sans-serif;
 $body-font-weight: 300;
 // $body-font-style: normal;
 
@@ -137,7 +137,7 @@ $body-font-weight: 300;
 // Grid Variables
 //
 
-$row-width: emCalc(1200);
+$row-width: 100%;
 // $column-gutter: emCalc(30);
 // $total-columns: 12;
 
@@ -160,7 +160,7 @@ $row-width: emCalc(1200);
 
 // Control header font styles
 
-$header-font-family: "proxima-nova-extra-condensed", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$header-font-family: "proxima-nova-extra-condensed", "Arial Narrow", "Georgia", Helvetica, Arial, sans-serif;
 $header-font-weight: 600;
 // $header-font-style: normal;
 $header-font-color: $header-text;
@@ -171,10 +171,10 @@ $header-font-color: $header-text;
 
 // Control header font sizes
 
-// $h1-font-size: emCalc(44);
+$h1-font-size: emCalc(40);
 // $h2-font-size: emCalc(37);
 // $h3-font-size: emCalc(27);
-// $h4-font-size: emCalc(23);
+$h4-font-size: emCalc(21);
 // $h5-font-size: emCalc(18);
 // $h6-font-size: 1em;
 
