@@ -13,7 +13,7 @@ exports.index = function(req, res){
 }
 
 exports.hospitals = function(req, res){
-  var max_results = 20;
+  var max_results = 100;
   var usps_state = req.params.usps_state
   var sort = {sort: {"value_rating":-1}}
   var filter = makeFilter(req)
@@ -39,6 +39,7 @@ exports.map = function(req, res){
   var cached = false
   console.log("making a map")
   console.log("the state is:" + usps_state)
+  console.log("the values are:" + values)
   console.log("with filter:" + JSON.stringify(filter))
   
   if(values == ""){
@@ -46,7 +47,6 @@ exports.map = function(req, res){
   }
   
   hospitalProvider.findAll(filter, sort, max_results, function(error, docs){
-    console.log(error)
     geo = parseJson.GeoJson(docs, usps_state, cached)
     res.render('map', { title: 'Map', hospitalGeo: geo.toString() })
   });
@@ -82,7 +82,6 @@ makeFilter = function(req){
         "$and":[]
       };
   if(filters){
-    console.log("filter" + filters.length)
     if(filters.length == 0){
       filterAnd["$and"].push({})
     }

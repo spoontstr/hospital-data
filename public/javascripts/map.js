@@ -1,18 +1,17 @@
 var h;
-var width = 860, 
-    height = 660,
+var width = 943, 
+    height = 625,
     centered
   
 var projection = d3.geo.albersUsa()
-                       .scale(1100)
-                       .translate([width / 2, height / 2.5])
+                       .scale(1150)
   
 var path = d3.geo.path()
                  .projection(projection);
   
 var svg = d3.select(".hospital_map").append("svg")
-                                     .attr("width", width)
-                                     .attr("height", height)
+                                    .attr("width", width)
+                                    .attr("height", height)
   
 svg.append("rect")
    .attr("class", "background")
@@ -26,31 +25,29 @@ var g = svg.append("g");  //create a group
 
 function mapStates() {
   queue()
-   .defer(d3.json, "/javascripts/api/state.json")
-   .defer(d3.json, "/javascripts/api/state_centroids.json")
+   .defer(d3.json, "/javascripts/api/us-named.json")
+   .defer(d3.json, "/javascripts/api/us-named.json")
    .await(ready)
   
-  function ready(error, us, centroids){
+  function ready(error, us){
     g.append("g")
      .attr("class","states-map")
      .selectAll("path")
-     .data(topojson.feature(us, us.objects.state).features)
+     .data(topojson.feature(us, us.objects.states).features)
      .enter().append("path")
-     .attr("id", function(d) { return d.properties.STUSPS10 })
+     .attr("id", function(d) { return d.properties.code })
      .attr("d", path)
      .on("click", mapClicked)
-
-    g.append("path")
-     .datum(topojson.mesh(us, us.objects.state, function(a, b) { return a !== b; }))
-     .attr("class", "state-borders")
-     .attr("d", path)
-   
-  }
+ }
 }
 function mapHospitals(state, duration) {
   var url = "map/" + state
   var duration = duration ? duration : 800;
-  
+
+  if(filterValueRatings != ""){
+    url += "?int_value_rating=" + filterValueRatings;
+  }
+    
   $('#hospital-map-result').load(url, function(result) {
     var h = jQuery.parseJSON($('#hospital-map-result .hospital_map').html());
     if(h && h.features) {
@@ -112,8 +109,8 @@ function mapClicked(d) {
     id = d.properties.id
     
     $(".breadcrumb").empty()
-                    .append("Back to <a href='javascript:void(0)' onclick='hospitalsBack(\"ALL\")'>US</a>")
-                    .append(" &gt; <a href='javascript:void(0)' onclick='hospitalsBack(\"" + d.properties.usps_state + "\")' >" + d.properties.state + "</a>")
+                   .append("Back to <a href='javascript:void(0)' onclick='goToState(\"ALL\")'>US</a>")
+                    .append(" &gt; <a href='javascript:void(0)' onclick='goToState(\"" + d.properties.usps_state + "\")' >" + d.properties.state + "</a>")
     
     $.get('/hospital/' + id, function(res) {
       $(".hospital-container .result").html(res)
@@ -131,19 +128,20 @@ function mapClicked(d) {
     $(".breadcrumb").empty();
     
     if(centered && d && d.properties) {
-      if(d.properties.STUSPS10){
-        $(".breadcrumb").append("Back to <a href='javascript:void(0)' onclick='hospitalsBack(\"ALL\")'>US</a>")
-        usps_state = d.properties.STUSPS10
+      if(d.properties.code){
+        $(".breadcrumb").append("Back to <a href='javascript:void(0)' onclick='goToState(\"ALL\")'>US</a>")
+        usps_state = d.properties.code
       }
     }
     filterState = usps_state
-      
-    mapHospitals(usps_state)
     
     var value = "" 
     if(filterValueRatings != ""){
       value = "?int_value_rating=" + filterValueRatings;
     }
+    
+    $('.state-selector').val(usps_state);
+    mapHospitals(usps_state)
     
     console.log('/hospitals/' + usps_state + value);
     $.get('/hospitals/' + usps_state + value, function(res) {
@@ -154,11 +152,11 @@ function mapClicked(d) {
 }
 function outAllInOneHospital(){
   $(".hospitals-container").fadeOut(500, function() {
-    $(".hospital-container").fadeIn(100)
+    $(".hospital-container").fadeIn(500)
   });
 }
 function outOneInAllHospitals(){
   $(".hospital-container").fadeOut(500, function() {
-    $(".hospitals-container").fadeIn(100)
+    $(".hospitals-container").fadeIn(500)
   });
 }

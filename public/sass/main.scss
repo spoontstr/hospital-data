@@ -6,7 +6,11 @@ html, body, .content-container {
   height: 100%;
 }
 body, .content-container {
-  background-color: $background;
+  min-width: 1200px;
+  //overflow: hidden;
+}
+.content-container {
+ background-color: $background;
 }
 h6 {
   color: $text-color;
@@ -31,22 +35,17 @@ header {
   height: 70px;
   text-align: right;
   h1 {
+    margin: 0;
     text-align: left;
-    margin: 0 0 0 0.05em;
     line-height: 70px;
     color: $header-text;
   }
 }
 .header-container {
-  //display: none;
+  padding-left: 1.25em;
   position: relative;
   vertical-align: bottom;
   height: 100%;
-}
-.content-container {
-  min-width: 1200px;
-}
-.header-container {
   .filter-link-container {
     display: inline-block;
     height: 100%;
@@ -73,31 +72,21 @@ header {
 }
 .filter-container {
   background-color: $white-80;
-  position:absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 2;
-  margin: 0 0.9375em;
-  padding: 1.25em;
-  //display: none;
+  padding: 0.625em 3em;
+  display: none;
   .caption {
     padding-left: 4.9em;
   }
-  .value-range {
-    .value {
-      @include opacity(.3);
-      @include border-radius(30px);
-      margin-right: 0.25em;
-      width: 25px;
-      height: 25px;
-      &.active {
-        @include opacity(1);
-        background-image: url("/images/checkmark.svg");
-        background-repeat: no-repeat;
-        background-position: 50% 50%;
-        background-size: 15px;
-      }
+  .value {
+    @include opacity(.6);
+    width: 25px;
+    height: 25px;
+    &.active {
+      @include opacity(1);
+      background-image: url("/images/checkmark.svg");
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      background-size: 15px;
     }
   }
 }
@@ -108,31 +97,42 @@ header {
 }
 .legend {
   position: absolute;
-  bottom: 1em;
-  width: 100%;
+  left: 3.125em;
+  bottom: 1.25em;
+  width: 500px
 }
-.value-range,
-.value-range-legend {
+.value {
+  @include border-radius(30px);
+  display: inline-block;
+  color: $white;
+  text-align: center;
+  line-height: 30px;
+  margin-right: 0.25em;
+  width: 30px;
+  height: 30px;
+}  
+.value-range {
   .value {
-    display: inline-block;
+    @include border-radius(0);
     width: 36px;
     height: 8px;
+    margin: 0;
   }
-}   
+}
 .value-range-legend {
-  .value {
-    font-size: 0.75em;
+  .caption {
+    width: 36px;
     text-align: center;
     font-weight: 400;
   }
-  .value.caption-sub {
+  .caption-sub {
+    font-size: 0.75em;
     width: 90px;
-    height: 0.875em;
-    font-weight: 400;
-    &.best {
+    display: inline-block;
+    &.worst {
       text-align: left;
     }
-    &.worst {
+    &.best {
       text-align: right;
     }
   }
@@ -157,6 +157,9 @@ header {
   fill: $value-1;
   background-color: $value-1;
 }
+.content-container {
+  min-width: 1200px;
+}
 .hospital_map {
   margin-left: 0;
   .background {
@@ -170,31 +173,41 @@ header {
     @include opacity(1);
   }
 }
-
 .data-container  {
   padding: 0;
-  height: 715px;
+  height: 680px;
   background-color: $white-40;
   overflow-y: scroll;
   
   .hospitals-container {
-    padding: 0.625em 1.5em 0.625em 1.25em;
+    padding: 0 1em 0 1.25em;
     h4 {
+      margin: 0;
+      padding: 0.625em 0 0.9375em 0;
       color: $text-color;
+      white-space: nowrap;
     }
     li {
       list-style: none;
-      margin: 0.625em 0 0 1em;
+      margin: 0 0.25em 1.3em 1em;
       padding: 0;
       font-size: 0.875em;
       line-height: 1.2em;
     }
-    a.hospital-link {
-      margin-right: 1.25em;
+    .value-rating-container {
+      text-align: right;
+      .value {
+        margin: 0;
+      }
+    }
+    .name {
+      padding: 0 1.25;
     }
     a.hospital-link.active {
       color: $selected-link;
-      margin-right: 1.25em;
+    }
+    .city-state-zip {
+      padding-top: 0.125em;
     }
   }
   .hospital-container {
@@ -202,7 +215,6 @@ header {
     h4 {
       margin: 0;
       padding: 0.625em 0.952em;
-      font-size: 21px;
       width: 100%;
       background-color: $background-accent;
       @include ellipsis();
@@ -216,7 +228,10 @@ header {
     }
     .ratings-container {
       .value {
-        padding-left: 0.75em;
+        height: auto;
+        width: auto;
+        margin: 0;
+        padding-left: 0.625em;
       }
       .label {
         width: 100%;
@@ -242,17 +257,10 @@ header {
 }
 .states-map {
   fill: $states;
+  stroke: #D4D9D3;
   .active {
     fill: $states-active;
   }
-}
-.state-borders {
-  fill: none;
-  stroke: #D4D9D3;
-  stroke-width: 1px;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-  pointer-events: none;
 }
 #hospital-map-result {
   display: none;
@@ -280,4 +288,10 @@ header {
     cursor: pointer;
   }
 }
-
+footer {
+  padding: 1.25em 1.25em;
+  height:  100px;
+  color: $grey-40;
+  font-size: 0.875em;
+  background-color: $header-background;
+}
