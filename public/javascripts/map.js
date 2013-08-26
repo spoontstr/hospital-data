@@ -151,7 +151,7 @@ function mapClicked(d) {
     
     $.get('/hospitals/' + usps_state + value, function(res) {
       $(".hospitals-container .result").html(res)
-      setTimeout(800, outOneInAllHospitals())
+      setTimeout(outOneInAllHospitals(),800)
       
     })
   }
