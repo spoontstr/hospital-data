@@ -13,10 +13,14 @@ exports.index = function(req, res){
 }
 
 exports.hospitals = function(req, res){
-  var max_results = 100;
+  var max_results = 1000;
   var usps_state = req.params.usps_state
   var sort = {sort: {"value_rating":-1}}
   var filter = makeFilter(req)
+  if(usps_state == "ALL") {
+    max_results = 50;
+  }
+
   
   hospitalProvider.findAll(filter, sort, max_results, function(error, docs){
     res.render('hospitals', { title: 'Top Value Hospitals: Hospitals', usps_state: usps_state, hospitals: docs })
