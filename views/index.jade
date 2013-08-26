@@ -80,6 +80,15 @@ block scripts
     var filterValueRatings = ''
     var filterState = ''
     var defaultUspsState = 'ALL'
+    var checkResize;
+    
+    
+    windowResized();
+    $('.hospitals-container .result').load('/hospitals/ALL');
+    mapStates();
+    mapHospitals(defaultUspsState);
+    
+    
     $("#error .close").click(function() {
       $("#error").hide();
     })
@@ -104,17 +113,13 @@ block scripts
       var values = []
       var value = "" 
       filterState = filterState != "" ? filterState : defaultUspsState;
-      
-      console.log("the filter state is" + filterState)
-      
+            
       $(this).toggleClass('active')
       $(this).parent().find(".active").each(function(){
         values.push($(this).data("int_value_rating"))
       })
       filterValueRatings = values.join(",");
       
-      console.log("the filter value rating is" + filterState)
-
       g.select("#hospital-locations")
        .selectAll("path")
        .style("opacity",.2);
@@ -124,7 +129,7 @@ block scripts
       }
     
       var url = '/hospitals/'+ filterState + value;
-      console.log("the url is" + url)
+
       $.get(url, function(data){
         $(".hospitals-container .result").html(data);
       })
@@ -134,11 +139,8 @@ block scripts
     $('.state-selector').change(function(){
       goToState($(this).val())
     })
-    $('.hospitals-container .result').load('/hospitals/ALL');
-    mapStates();
-    mapHospitals(defaultUspsState);
     function goToState(usps_state) {
-      var p1 = {}
+      var p1
       var url = '/hospitals/' + usps_state
       if(usps_state !== defaultUspsState) {
         p1 = d3.select("#" + usps_state).datum()
@@ -152,6 +154,34 @@ block scripts
       mapClicked(p1)
       $(".hospitals-container .result").load(url);
     } 
+    function windowResized(){
+      var x = locX
+      var y = locY
+      var k = 1
+      window_width = $(window).width();
+      data_container_width = $(".data-container").width();
+      map_width = window_width - data_container_width
+      if(map_width <= default_width) {
+        map_width = default_width;
+      }
+      if(centered) {
+        var centroid = path.centroid(centered)
+        x = centroid[0]
+        y = centroid[1]
+        k = 4
+      }
+      d3.select(".background").attr("width", map_width);
+      g.transition()
+       .duration(200)
+       .attr("transform", "translate(" + map_width / 2 + "," + map_height / 2.5 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
+    
+    }
+    $(window).resize(function() {
+        clearTimeout(checkResize);
+        var checkResize = setTimeout(function() {
+          windowResized();
+        }, 1000);
+    });
 
     
        

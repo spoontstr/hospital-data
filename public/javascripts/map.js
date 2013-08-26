@@ -1,26 +1,32 @@
+//TODO: this should be namespaced
 var h;
-var width = 943, 
-    height = 625,
+var default_width = 899,
+    default_height = 625,
+    map_width = default_width, 
+    map_height = default_height,
+    locX = map_width/2,
+    locY = map_height/2.5,
     centered
   
 var projection = d3.geo.albersUsa()
                        .scale(1150)
+                       .translate([locX, locY])
   
 var path = d3.geo.path()
                  .projection(projection);
   
-var svg = d3.select(".hospital_map").append("svg")
-                                    .attr("width", width)
-                                    .attr("height", height)
-  
+var svg = d3.select(".hospital_map")
+            .append("svg")
+                                    
 svg.append("rect")
    .attr("class", "background")
-   .attr("width", width)
-   .attr("height", height)
+   .attr("width", map_width)
+   .attr("height", map_height)
    .on("click", mapClicked)
  
   
-var g = svg.append("g");  //create a group
+var g = svg.append("g")
+           .attr("class", "map-container");  //create a group
     
 
 function mapStates() {
@@ -83,16 +89,16 @@ function mapClicked(d) {
     k = 4;
     centered = d
   } else {
-    x = width / 2
-    y = height / 2
+    x = locX
+    y = locY
     k = 1
     centered = null
   }
   
-  var zoomMap = d3.transition().duration(800).each( function() {
-                  g.transition()
-                   .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
-                })
+  d3.transition().duration(800).each( function() {
+    g.transition()
+     .attr("transform", "translate(" + map_width / 2 + "," + map_height / 2.5 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
+  })
 
   
 
@@ -109,7 +115,7 @@ function mapClicked(d) {
     id = d.properties.id
     
     $(".breadcrumb").empty()
-                   .append("Back to <a href='javascript:void(0)' onclick='goToState(\"ALL\")'>US</a>")
+                    .append("Back to <a href='javascript:void(0)' onclick='goToState(\"ALL\")'>US</a>")
                     .append(" &gt; <a href='javascript:void(0)' onclick='goToState(\"" + d.properties.usps_state + "\")' >" + d.properties.state + "</a>")
     
     $.get('/hospital/' + id, function(res) {
@@ -143,7 +149,6 @@ function mapClicked(d) {
     $('.state-selector').val(usps_state);
     mapHospitals(usps_state)
     
-    console.log('/hospitals/' + usps_state + value);
     $.get('/hospitals/' + usps_state + value, function(res) {
       $(".hospitals-container .result").html(res)
       outOneInAllHospitals()

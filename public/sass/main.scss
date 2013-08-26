@@ -162,8 +162,10 @@ header {
 }
 .hospital_map {
   margin-left: 0;
+  height: 625px;
   .background {
     fill: $background;
+    stroke: 1px solid red;
     pointer-events: all;
   }
   .hospital-location {
@@ -175,7 +177,7 @@ header {
 }
 .data-container  {
   padding: 0;
-  height: 680px;
+  height: 685px;
   background-color: $white-40;
   overflow-y: scroll;
   
@@ -214,7 +216,7 @@ header {
     display: none;
     h4 {
       margin: 0;
-      padding: 0.625em 0.952em;
+      padding: 0.625em 1.25em;
       width: 100%;
       background-color: $background-accent;
       @include ellipsis();
@@ -223,25 +225,23 @@ header {
       display: inline-block;
       color: $text-color;
     }
-    .address-container {
-      padding: 1.25em 0 0.625em 0;
-    }
-    .ratings-container {
-      .value {
-        height: auto;
-        width: auto;
-        margin: 0;
-        padding-left: 0.625em;
+    .hospital-data-container  {
+      padding: 1.25em 1.25em 0.625em 1.25em;
+      .address-container {
+        padding-bottom: 0.625em;
       }
-      .label {
-        width: 100%;
-        text-align: center;
-        font-weight: 300;
-        background-color: transparent;
-        color: $text-color;
+      .ratings-container {
+        .label {
+          width: 100%;
+          text-align: center;
+          font-weight: 300;
+          background-color: transparent;
+          color: $text-color;
+        }
       }
     }
     .rating {
+      margin: 0px auto;
       text-align: center;
       width: 60px;
       height: 60px;

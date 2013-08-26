@@ -3,23 +3,23 @@ if hospital
   h4  #{hospital.name}
   
   .row.collapse
-    .large-10.columns.large-centered
+    .large-12.columns.hospital-data-container
       .address-container
         .address #{hospital.address}
         .city-state-zip  #{hospital.city}, #{hospital.usps_state} #{hospital.zip} 
-      .ratings-container
+      .ratings-container.large-10.columns
         h5 Ratings
         .row.collapse
           .large-4.columns
-            .value
+            .qual
               h3.rating.cost-rating  #{hospital.cost_rating} 
             .label Cost
           .large-4.columns
-            .value
+            .qual
               h3.rating.quality-rating  #{hospital.quality_rating}
             .label Quality
           .large-4.columns
-            .value
+            .qual
               h3.rating.value-rating(class="value-" +  Math.round(hospital.value_rating))  #{hospital.value_rating}
             .label Value
       
