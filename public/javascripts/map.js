@@ -152,7 +152,7 @@ function mapClicked(d) {
     $.get('/hospitals/' + usps_state + value, function(res) {
       $(".hospitals-container .result").html(res)
       $(".hospital-container").hide()
-      $(".hospitals-container").show('slow')
+      $(".hospitals-container").show()
       //outOneInAllHospitals()
     })
   }
