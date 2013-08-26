@@ -267,7 +267,7 @@ header h1 {
 }
 /* line 201, ../sass/main.scss */
 .data-container .hospitals-container .value-rating-container .value {
-  margin: 0;
+  margin-right: 0.625em;
 }
 /* line 205, ../sass/main.scss */
 .data-container .hospitals-container .name {

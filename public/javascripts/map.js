@@ -70,11 +70,11 @@ function mapHospitals(state, duration, callback) {
        .attr("id", function(d) { return "h" + d.properties.id })
        .attr("class", function(d) { return "hospital-location value-" + d.properties.value_rating })
        .on("click", mapClicked)
-      
-      g.selectAll("#hospital-locations")
-       .transition()
-       .duration(duration)
-       .style("opacity",1);
+       
+       g.selectAll("#hospital-locations")
+        .transition()
+        .duration(duration)
+        .style("opacity",1);
     }
     callback()
   });
@@ -82,6 +82,7 @@ function mapHospitals(state, duration, callback) {
 
 function mapClicked(d) {
   var x, y, k;
+  var duration = 500
   
   if (d && centered !== d) {
     var centroid = path.centroid(d)
@@ -96,7 +97,7 @@ function mapClicked(d) {
     centered = null
   }
   
-  d3.transition().duration(800).each( function() {
+  d3.transition().duration(duration).each( function() {
     g.transition()
      .attr("transform", "translate(" + map_width / 2 + "," + map_height / 2.5 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
   })
@@ -125,7 +126,19 @@ function mapClicked(d) {
       g.select("#h" + id).style("opacity", 1)
       
       if( $(".hospitals-container").is(":visible") ) {
-        outAllInOneHospital()
+        d3.selectAll(".hospitals-container")
+          .transition()
+          .duration(duration)
+          .style("opacity",0)
+          .delay(duration)
+          .style("display", "none")
+    
+        d3.selectAll(".hospital-container")
+          .transition()
+          .duration(duration)
+          .style("opacity",1)
+          .delay(duration)
+          .style("display", "block")
       }
       
     })
@@ -149,22 +162,29 @@ function mapClicked(d) {
     
     $('.state-selector').val(usps_state);
     
-    mapHospitals(usps_state, 800, function(){
-      $.get('/hospitals/' + usps_state + value, function(res) {
-        $(".hospitals-container .result").html(res)
-        $(".hospital-container").hide()
-        $(".hospitals-container").show()
-      })
+    mapHospitals(usps_state);
+    
+    $.get('/hospitals/' + usps_state + value, function(res) {
+      $(".hospitals-container .result").html(res)
     })
+    
+    d3.selectAll(".hospital-container")
+        .transition()
+        .duration(duration)
+        .style("opacity",0)
+        .delay(duration)
+        .style("display", "none")
+    
+    
+    d3.selectAll(".hospitals-container")
+        .transition()
+        .duration(duration)
+        .style("opacity",1)
+        .delay(duration)
+        .style("display", "block")
+    
+        
+     
   }
 }
-function outAllInOneHospital(){
-  $(".hospitals-container").fadeOut(500, function() {
-    $(".hospital-container").fadeIn(100)
-  });
-}
-function outOneInAllHospitals(){
-  $(".hospital-container").fadeOut(500, function() {
-    $(".hospitals-container").fadeIn(100)
-  });
-}
+
