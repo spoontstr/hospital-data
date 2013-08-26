@@ -86,11 +86,10 @@ block scripts
     var defaultUspsState = 'ALL'
     var checkResize;
     
-    
-    windowResized();
-    $('.hospitals-container .result').load('/hospitals/ALL');
     mapStates();
+    $('.hospitals-container .result').load('/hospitals/ALL');
     mapHospitals(defaultUspsState);
+    windowResized();
     
     
     $("#error .close").click(function() {
