@@ -149,7 +149,7 @@ function mapClicked(d) {
     
     $('.state-selector').val(usps_state);
     
-    mapHospitals(usps_state, 1500, function(){
+    mapHospitals(usps_state, 800, function(){
       $.get('/hospitals/' + usps_state + value, function(res) {
         $(".hospitals-container .result").html(res)
         outOneInAllHospitals()
