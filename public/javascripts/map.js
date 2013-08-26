@@ -9,7 +9,7 @@ var default_width = 899,
     centered
   
 var projection = d3.geo.albersUsa()
-                       .scale(1150)
+                       .scale(1100)
                        .translate([locX, locY])
   
 var path = d3.geo.path()
@@ -17,6 +17,8 @@ var path = d3.geo.path()
   
 var svg = d3.select(".hospital_map")
             .append("svg")
+            .attr("width", map_width)
+            .attr("height", map_height)
                                     
 svg.append("rect")
    .attr("class", "background")
@@ -31,7 +33,6 @@ var g = svg.append("g")
 
 function mapStates(callback) {
   d3.json("/javascripts/api/us-named.json", function(error, us) {
-    console.log(error);
     g.append("g")
      .attr("render-order", 0)
      .attr("class","states-map")
@@ -75,8 +76,9 @@ function mapHospitals(state, duration, callback) {
        .duration(duration)
        .style("opacity",1);
     }
+    callback()
   });
-  callback()
+  //callback()
 }
 
 function mapClicked(d) {
@@ -147,14 +149,14 @@ function mapClicked(d) {
     }
     
     $('.state-selector').val(usps_state);
-    mapHospitals(usps_state, function() {
-      $.get('/hospitals/' + usps_state + value, function(res) {
-        $(".hospitals-container .result").html(res)
-        outOneInAllHospitals()
-      })
+    mapHospitals(usps_state)
+    
+    $.get('/hospitals/' + usps_state + value, function(res) {
+      $(".hospitals-container .result").html(res)
+      $(".hospital-container").hide()
+      $(".hospitals-container").show()
+      //outOneInAllHospitals()
     })
-    
-    
   }
 }
 function outAllInOneHospital(){

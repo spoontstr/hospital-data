@@ -175,6 +175,10 @@ block scripts
         k = 4
       }
       d3.select(".background").attr("width", map_width);
+      d3.select(".hospital_map")
+        .select("svg")
+        .attr("width", map_width)
+
       g.transition()
        .duration(200)
        .attr("transform", "translate(" + map_width / 2 + "," + map_height / 2.5 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
