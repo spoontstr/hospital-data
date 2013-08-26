@@ -30,14 +30,11 @@ var g = svg.append("g")
     
 
 function mapStates() {
-  queue()
-   .defer(d3.json, "/javascripts/api/us-named.json")
-   .defer(d3.json, "/javascripts/api/us-named.json")
-   .await(ready)
   
-  function ready(error, us){
+  d3.json("/javascripts/api/us-named.json", function(error, us) {
+    console.log(error);
     g.append("g")
-     .attr("render-order", -1)
+     .attr("render-order", 0)
      .attr("class","states-map")
      .selectAll("path")
      .data(topojson.feature(us, us.objects.states).features)
@@ -45,7 +42,7 @@ function mapStates() {
      .attr("id", function(d) { return d.properties.code })
      .attr("d", path)
      .on("click", mapClicked)
- }
+  })
 }
 function mapHospitals(state, duration) {
   var url = "map/" + state
