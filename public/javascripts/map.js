@@ -29,8 +29,7 @@ var g = svg.append("g")
            .attr("class", "map-container");  //create a group
     
 
-function mapStates() {
-  
+function mapStates(callback) {
   d3.json("/javascripts/api/us-named.json", function(error, us) {
     console.log(error);
     g.append("g")
@@ -42,9 +41,10 @@ function mapStates() {
      .attr("id", function(d) { return d.properties.code })
      .attr("d", path)
      .on("click", mapClicked)
+     callback()
   })
 }
-function mapHospitals(state, duration) {
+function mapHospitals(state, duration, callback) {
   var url = "map/" + state
   var duration = duration ? duration : 800;
 
@@ -75,6 +75,7 @@ function mapHospitals(state, duration) {
        .duration(duration)
        .style("opacity",1);
     }
+    callback()
   });
 }
 
