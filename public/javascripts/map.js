@@ -151,17 +151,18 @@ function mapClicked(d) {
     
     $.get('/hospitals/' + usps_state + value, function(res) {
       $(".hospitals-container .result").html(res)
-      outOneInAllHospitals()
+      setTimeout(800, outOneInAllHospitals())
+      
     })
   }
 }
 function outAllInOneHospital(){
   $(".hospitals-container").fadeOut(500, function() {
-    $(".hospital-container").fadeIn(500)
+    $(".hospital-container").fadeIn(100)
   });
 }
 function outOneInAllHospitals(){
   $(".hospital-container").fadeOut(500, function() {
-    $(".hospitals-container").fadeIn(500)
+    $(".hospitals-container").fadeIn(100)
   });
 }
