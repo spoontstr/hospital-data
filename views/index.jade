@@ -88,7 +88,7 @@ block scripts
     
     mapStates(function() {
       $('.hospitals-container .result').load('/hospitals/ALL');
-      mapHospitals(defaultUspsState);
+      mapHospitals(defaultUspsState,500,function(){});
       windowResized()
     });
     
@@ -138,7 +138,7 @@ block scripts
         $(".hospitals-container .result").html(data);
       })
       
-      mapHospitals(filterState + value);
+      mapHospitals(filterState + value,500,function(){});
     })
     $('.state-selector').change(function(){
       goToState($(this).val())

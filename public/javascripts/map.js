@@ -78,7 +78,6 @@ function mapHospitals(state, duration, callback) {
     }
     callback()
   });
-  //callback()
 }
 
 function mapClicked(d) {
@@ -149,13 +148,11 @@ function mapClicked(d) {
     }
     
     $('.state-selector').val(usps_state);
-    mapHospitals(usps_state)
-    
-    $.get('/hospitals/' + usps_state + value, function(res) {
-      $(".hospitals-container .result").html(res)
-      $(".hospital-container").hide()
-      $(".hospitals-container").show()
-      //outOneInAllHospitals()
+    mapHospitals(usps_state, 500, function(){
+      $.get('/hospitals/' + usps_state + value, function(res) {
+        $(".hospitals-container .result").html(res)
+        outOneInAllHospitals()
+      })
     })
   }
 }
