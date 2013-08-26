@@ -37,7 +37,7 @@ function mapStates() {
   
   function ready(error, us){
     g.append("g")
-     .attr("render-order", 1)
+     .attr("render-order", -1)
      .attr("class","states-map")
      .selectAll("path")
      .data(topojson.feature(us, us.objects.states).features)
