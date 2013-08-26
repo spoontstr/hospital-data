@@ -37,6 +37,7 @@ function mapStates() {
   
   function ready(error, us){
     g.append("g")
+     .attr("render-order", 1)
      .attr("class","states-map")
      .selectAll("path")
      .data(topojson.feature(us, us.objects.states).features)
@@ -61,6 +62,7 @@ function mapHospitals(state, duration) {
         .remove();
         
       g.append("g")
+       .attr("render-order", 2)
        .attr("id","hospital-locations")
        .style("opacity",0)
        .selectAll("path")
