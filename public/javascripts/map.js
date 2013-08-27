@@ -1,7 +1,7 @@
 //TODO: this should be namespaced and rewritten, transitions pulled out and queued
 
 var h;
-var default_width = 774,
+var default_width = 900,
     default_height = 580,
     map_width = default_width, 
     map_height = default_height,
@@ -10,7 +10,7 @@ var default_width = 774,
     centered
   
 var projection = d3.geo.albersUsa()
-                       .scale(1100)
+                       .scale(1050)
                        .translate([locX, locY])
   
 var path = d3.geo.path()

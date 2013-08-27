@@ -85,6 +85,7 @@ function initializeApplication(){
   })
 }
 
+
 // close the error dialog
 $("#error .close").click(function() {
   $("#error").hide();
@@ -182,9 +183,8 @@ function windowResized(){
     .attr("width", map_width)
 
   g.transition()
-   .duration(200)
+   .duration(0)
    .attr("transform", "translate(" + map_width / 2 + "," + map_height / 2.3 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
-
 }
 
 $(window).resize(function() {
