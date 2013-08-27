@@ -1,11 +1,12 @@
-//TODO: this should be namespaced
+//TODO: this should be namespaced and rewritten, transitions pulled out and queued
+
 var h;
-var default_width = 899,
-    default_height = 625,
+var default_width = 774,
+    default_height = 580,
     map_width = default_width, 
     map_height = default_height,
     locX = map_width/2,
-    locY = map_height/2.5,
+    locY = map_height/2.3,
     centered
   
 var projection = d3.geo.albersUsa()
@@ -99,7 +100,7 @@ function mapClicked(d) {
   
   d3.transition().duration(duration).each( function() {
     g.transition()
-     .attr("transform", "translate(" + map_width / 2 + "," + map_height / 2.5 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
+     .attr("transform", "translate(" + map_width / 2 + "," + map_height / 2.3 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
   })
 
   
