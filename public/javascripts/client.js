@@ -2,6 +2,7 @@ var filterValueRatings = ''
 var filterState = ''
 var defaultUspsState = 'ALL'
 var checkResize;
+var header = ""
 var count = 1;
 var i = 0
 var interval = 700;
@@ -14,7 +15,7 @@ $("#modal").fadeIn(800, function() {
 
 function animateCountFirstSequence(){
   if(count < 549){
-    $("#modal .message h1").html(count)
+    $("#modal .message h1").html("$" + count)
     count += 1;
     if(interval > 100) {
       interval -= 50
@@ -25,7 +26,7 @@ function animateCountFirstSequence(){
     setTimeout(animateCountFirstSequence,interval)
   }
   else{
-    header = count
+    header = "$" + count
     animateCountSecondSequence()
   }
 }
@@ -39,7 +40,7 @@ function animateCountSecondSequence(){
   }
   else {
     $("#modal .text").fadeIn(800, function(){
-      setTimeout(animateValueSequence,3500) 
+      setTimeout(animateValueSequence,4000) 
     })
   }
 }
@@ -50,7 +51,7 @@ function animateValueSequence() {
     $(this).find("h1").html("").hide()
     $(this).find(".text").html("").hide()
     $("#modal .message").fadeIn(1000,function(){
-      setTimeout(animateDataDescriptionSequence,2000)
+      setTimeout(animateDataDescriptionSequence,1000)
     })
   })
 }
