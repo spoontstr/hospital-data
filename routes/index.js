@@ -62,6 +62,7 @@ makeFilter = function(req){
   var usps_state = req.params.usps_state
   var values = req.query.int_value_rating
   var i = 0
+  console.log("values" + values)
   
   if(usps_state !== 'ALL') {
      filters.push({"usps_state":usps_state})
