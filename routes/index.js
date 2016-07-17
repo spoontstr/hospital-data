@@ -3,7 +3,7 @@
  */
 
 var HospitalProvider = require('./helpers/hospital-provider').HospitalProvider
-var mongolab_url = 'mongodb://hdadmin:1npat!ent@ds041238.mlab.com:41238/inpatient_data'
+var mongolab_url = 'mongodb://hdadmin:1npat!ent@ds041238.mongolab.com:41238/inpatient_data'
 var hospitalProvider = new HospitalProvider(mongolab_url)
 var parseJson = require('./helpers/parse-json.js')
 var filterJson = {}  
