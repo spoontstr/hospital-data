@@ -52,6 +52,7 @@ exports.map = function(req, res){
   
   hospitalProvider.findAll(filter, sort, max_results, function(error, docs){
     geo = parseJson.GeoJson(docs, usps_state, cached)
+    console.log(geo.toString())
     res.render('map', { title: 'Map', hospitalGeo: geo.toString() })
   });
 }
