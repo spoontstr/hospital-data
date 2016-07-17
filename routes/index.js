@@ -3,7 +3,7 @@
  */
 
 var HospitalProvider = require('./helpers/hospital-provider').HospitalProvider
-var mongolab_url = 'mongodb://hospital_data_user:Inpat!ent@ds041238.mlab.com:41238/inpatient_data'
+var mongolab_url = 'mongodb://inpatient_data_user:1npat!ent@ds041238.mlab.com:41238/inpatient_data'
 var hospitalProvider = new HospitalProvider(mongolab_url)
 var parseJson = require('./helpers/parse-json.js')
 var filterJson = {}  
@@ -43,8 +43,6 @@ exports.map = function(req, res){
   var cached = false
   console.log("making a map")
   console.log("the state is:" + usps_state)
-  console.log("the values are:" + values)
-  console.log("with filter:" + JSON.stringify(filter))
   
   if(values == ""){
     cached = true
@@ -52,7 +50,6 @@ exports.map = function(req, res){
   
   hospitalProvider.findAll(filter, sort, max_results, function(error, docs){
     geo = parseJson.GeoJson(docs, usps_state, cached)
-    console.log(geo.toString())
     res.render('map', { title: 'Map', hospitalGeo: geo.toString() })
   });
 }
@@ -62,7 +59,6 @@ makeFilter = function(req){
   var usps_state = req.params.usps_state
   var values = req.query.int_value_rating
   var i = 0
-  console.log("values" + values)
   
   if(usps_state !== 'ALL') {
      filters.push({"usps_state":usps_state})
