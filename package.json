@@ -2,7 +2,7 @@
   "name": "application-name",
   "version": "0.0.1",
   "engines": {
-    "node": "4.4.7"
+    "node": "0.10.32"
   },
   "private": true,
   "scripts": {
@@ -12,7 +12,7 @@
     "express": "3.3.5",
     "jade": "*",
     "jquery": "~1.8.3",
-    "mongodb": "*",
+    "mongodb": "~3",
     "topojson": "*"
   }
 }
