@@ -43,6 +43,8 @@ exports.map = function(req, res){
   var cached = false
   console.log("making a map")
   console.log("the state is:" + usps_state)
+  console.log("the values are:" + values)		
+  console.log("with filter:" + JSON.stringify(filter))
   
   if(values == ""){
     cached = true
