@@ -41,6 +41,7 @@ exports.map = function(req, res){
   var sort = {sort: {"value_rating":1}}
   var filter = makeFilter(req)
   var cached = false
+  console.log(hospitalProvider)
   console.log("making a map")
   console.log("the state is:" + usps_state)
   console.log("the values are:" + values)		
