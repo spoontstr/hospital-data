@@ -10,7 +10,9 @@ var providerDb;
 HospitalProvider = function(url) {
   if(providerDb == null) {
     MongoClient.connect(url, function(err,db){
+      console.log(err)
       if(err) return console.error(err);
+      console.log(db)
       else providerDb = db;
     });
   }
